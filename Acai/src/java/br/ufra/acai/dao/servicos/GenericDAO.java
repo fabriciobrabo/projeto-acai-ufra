@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package br.ufra.acai.dao;
+package br.ufra.acai.dao.servicos;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author fabricio correa brabo
  */
-public interface InterfaceGenericDAO<T> {
+public interface GenericDAO<T> {
     
     public boolean criar(T o);
     public boolean atualizar(T o);

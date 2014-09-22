@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package br.ufra.acai.dao;
+package br.ufra.acai.dao.servicos;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -14,11 +14,11 @@ import javax.persistence.Persistence;
  *
  * @author fabricio correa brabo
  */
-public class FabricaEntityManager {
+public class FabricaDAO {
     
     private static EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("vendaPU");
     
-    private FabricaEntityManager() {
+    private FabricaDAO() {
     }
 
     public static EntityManagerFactory obterFabrica() {

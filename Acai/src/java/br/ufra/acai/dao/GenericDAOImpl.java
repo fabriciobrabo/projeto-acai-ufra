@@ -5,6 +5,8 @@
  */
 package br.ufra.acai.dao;
 
+import br.ufra.acai.dao.servicos.FabricaDAO;
+import br.ufra.acai.dao.servicos.GenericDAO;
 import java.util.List;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
@@ -14,19 +16,18 @@ import javax.persistence.Query;
  *
  * @author fabricio correa brabo
  */
-public class GenericDAO<T> implements InterfaceGenericDAO<T> {
+public class GenericDAOImpl<T> implements GenericDAO<T> {
 
-    private EntityManager em = (EntityManager) FabricaEntityManager.obterFabrica().createEntityManager();
+    private EntityManager em = (EntityManager) FabricaDAO.obterFabrica().createEntityManager();
 
-    public GenericDAO() {
+    public GenericDAOImpl() {
     }
 
     @Override
     public boolean criar(T o) {
         try {
             this.iniciarTransacao();
-            em.persist(o);
-            this.confirmarTransacao();
+            this.getEntityManager().persist(o);
             return true;
         } catch (Exception e) {
             if (this.transacaoAberta()) {
@@ -40,7 +41,7 @@ public class GenericDAO<T> implements InterfaceGenericDAO<T> {
     public boolean atualizar(T o) {
         try {
             this.iniciarTransacao();
-            em.merge(o);
+            this.getEntityManager().merge(o);
             this.confirmarTransacao();
             return true;
         } catch (Exception e) {
@@ -55,7 +56,7 @@ public class GenericDAO<T> implements InterfaceGenericDAO<T> {
     public boolean excluir(T o) {
         try {
             this.iniciarTransacao();
-            em.remove(o);
+            this.getEntityManager().remove(o);
             this.confirmarTransacao();
             return true;
         } catch (Exception e) {
@@ -72,11 +73,9 @@ public class GenericDAO<T> implements InterfaceGenericDAO<T> {
             return null;
         }
         try {
-            this.iniciarTransacao();
             String query = classe.getSimpleName() + ".findById";
-            final Query q = em.createNamedQuery(query);
+            final Query q = this.getEntityManager().createNamedQuery(query);
             T t = (T) q.setParameter("id", id).getSingleResult();
-            this.confirmarTransacao();
             return t;
         } catch (Exception e) {
             if (this.transacaoAberta()) {
@@ -90,11 +89,9 @@ public class GenericDAO<T> implements InterfaceGenericDAO<T> {
     public List<T> obterTodos(Class<T> classe) {
         List<T> resposta = null;
         try {
-            this.iniciarTransacao();
             String query = classe.getSimpleName() + ".findAll";
-            Query q = em.createNamedQuery(query);
+            Query q = this.getEntityManager().createNamedQuery(query);
             resposta = (List<T>) q.getResultList();
-            this.confirmarTransacao();
             return resposta;
         } catch (Exception e) {
             if (this.transacaoAberta()) {
@@ -109,51 +106,49 @@ public class GenericDAO<T> implements InterfaceGenericDAO<T> {
         try {
             this.iniciarTransacao();
             String query = "SELECT c FROM " + classe.getSimpleName() + " c ORDER BY c." + atributo;
-            Query q = em.createQuery(query);
+            Query q = this.getEntityManager().createQuery(query);
             resposta = (List<T>) q.getResultList();
-            this.desfazerTransacao();
             return resposta;
         } catch (Exception e) {
             if (this.transacaoAberta()) {
-                this.transacaoAberta();
             }
             return resposta;
         }
     }
 
-    public boolean iniciarTransacao() {
+    private boolean iniciarTransacao() {
         try {
-            if (em.getTransaction().isActive()) {
+            if (this.getEntityManager().getTransaction().isActive()) {
                 return true;
             }
-            em.getTransaction().begin();
+            this.getEntityManager().getTransaction().begin();
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
-    public boolean confirmarTransacao() {
+    private boolean confirmarTransacao() {
         try {
-            em.getTransaction().commit();
+            this.getEntityManager().getTransaction().commit();
             return true;
         } catch (EntityExistsException e) {
             return false;
         }
     }
 
-    public boolean desfazerTransacao() {
+    private boolean desfazerTransacao() {
         try {
-            em.getTransaction().rollback();
+            this.getEntityManager().getTransaction().rollback();
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
-    public boolean transacaoAberta() {
+    private boolean transacaoAberta() {
         try {
-            return em.isOpen();
+            return this.getEntityManager().isOpen();
         } catch (Exception e) {
             return false;
         }

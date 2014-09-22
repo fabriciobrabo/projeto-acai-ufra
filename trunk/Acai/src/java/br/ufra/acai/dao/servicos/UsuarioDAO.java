@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufra.acai.dao;
+package br.ufra.acai.dao.servicos;
 
 /**
  *
  * @author fabricio correa brabo
  */
-public interface InterfaceUsuarioDAO<T> {
+public interface UsuarioDAO<T> extends GenericDAO<T> {
 
     public T obter(String acesso);
 }

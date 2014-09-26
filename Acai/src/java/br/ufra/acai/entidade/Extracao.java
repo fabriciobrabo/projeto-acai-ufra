@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author fabricio correa brabo
+ * @author ufrastic
  */
 @Entity
 @Table(name = "extracao")
@@ -62,7 +62,7 @@ public class Extracao implements Serializable {
     @JoinColumn(name = "local", referencedColumnName = "local")
     @ManyToOne(optional = false)
     private Local local;
-    @JoinColumn(name = "produtor", referencedColumnName = "produtor")
+    @JoinColumn(name = "produtor", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Produtor produtor;
 

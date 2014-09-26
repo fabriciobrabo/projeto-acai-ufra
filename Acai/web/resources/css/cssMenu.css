@@ -1,0 +1,11 @@
+.fundo .ui-menu-child {
+    background: aliceblue
+}
+.ui-layout-west {
+    border: none;
+    z-index:20 !important;
+    overflow:visible !important;
+}
+.ui-layout-west .ui-layout-unit-content {
+    overflow:visible !important;
+}

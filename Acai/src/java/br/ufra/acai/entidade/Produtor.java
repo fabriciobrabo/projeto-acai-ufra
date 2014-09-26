@@ -26,14 +26,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author fabricio correa brabo
+ * @author ufrastic
  */
 @Entity
 @Table(name = "produtor")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Produtor.findAll", query = "SELECT p FROM Produtor p"),
-    @NamedQuery(name = "Produtor.findByProdutor", query = "SELECT p FROM Produtor p WHERE p.produtor = :produtor"),
+    @NamedQuery(name = "Produtor.findById", query = "SELECT p FROM Produtor p WHERE p.id = :id"),
     @NamedQuery(name = "Produtor.findByNome", query = "SELECT p FROM Produtor p WHERE p.nome = :nome"),
     @NamedQuery(name = "Produtor.findBySobrenome", query = "SELECT p FROM Produtor p WHERE p.sobrenome = :sobrenome"),
     @NamedQuery(name = "Produtor.findByRg", query = "SELECT p FROM Produtor p WHERE p.rg = :rg"),
@@ -47,8 +47,8 @@ public class Produtor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "produtor")
-    private Integer produtor;
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "nome")
     private String nome;
@@ -87,12 +87,12 @@ public class Produtor implements Serializable {
     public Produtor() {
     }
 
-    public Produtor(Integer produtor) {
-        this.produtor = produtor;
+    public Produtor(Integer id) {
+        this.id = id;
     }
 
-    public Produtor(Integer produtor, String nome, String sobrenome, String rg, String cpf, String telefone, String email, String localizacao) {
-        this.produtor = produtor;
+    public Produtor(Integer id, String nome, String sobrenome, String rg, String cpf, String telefone, String email, String localizacao) {
+        this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.rg = rg;
@@ -102,12 +102,12 @@ public class Produtor implements Serializable {
         this.localizacao = localizacao;
     }
 
-    public Integer getProdutor() {
-        return produtor;
+    public Integer getId() {
+        return id;
     }
 
-    public void setProdutor(Integer produtor) {
-        this.produtor = produtor;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -210,7 +210,7 @@ public class Produtor implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (produtor != null ? produtor.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -221,7 +221,7 @@ public class Produtor implements Serializable {
             return false;
         }
         Produtor other = (Produtor) object;
-        if ((this.produtor == null && other.produtor != null) || (this.produtor != null && !this.produtor.equals(other.produtor))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -229,7 +229,7 @@ public class Produtor implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.acai.entidade.Produtor[ produtor=" + produtor + " ]";
+        return "br.ufra.acai.entidade.Produtor[ id=" + id + " ]";
     }
     
 }

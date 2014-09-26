@@ -3,20 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package br.ufra.acai.dao.servicos;
+package br.ufra.acai.rn;
 
 import java.util.List;
 
 /**
  *
- * @author fabricio correa brabo
+ * @author ufrastic
+ * @param <T>
  */
-public interface GenericDAO<T> {
-    
-    public boolean criar(T o);
-    public boolean atualizar(T o);
-    public boolean excluir(T o);
+public interface GenericRN<T> {
+
+    public boolean salvar(T t);
+    public boolean remover(T t);
     public T obter(Class<T> classe, Object id);
     public List<T> obterTodos(Class<T> classe);
 }

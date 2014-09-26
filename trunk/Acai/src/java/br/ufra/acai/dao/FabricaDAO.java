@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package br.ufra.acai.dao.servicos;
+package br.ufra.acai.dao;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -16,7 +10,7 @@ import javax.persistence.Persistence;
  */
 public class FabricaDAO {
     
-    private static EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("vendaPU");
+    private static EntityManagerFactory fabrica = Persistence.createEntityManagerFactory("AcaiPU");
     
     private FabricaDAO() {
     }

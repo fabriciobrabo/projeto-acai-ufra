@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author fabricio correa brabo
+ * @author ufrastic
  */
 @Entity
 @Table(name = "item_produto")

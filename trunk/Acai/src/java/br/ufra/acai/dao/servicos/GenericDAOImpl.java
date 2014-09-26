@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package br.ufra.acai.dao;
+package br.ufra.acai.dao.servicos;
 
-import br.ufra.acai.dao.servicos.FabricaDAO;
-import br.ufra.acai.dao.servicos.GenericDAO;
+import br.ufra.acai.dao.FabricaDAO;
+import br.ufra.acai.dao.GenericDAO;
 import java.util.List;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
@@ -15,12 +10,14 @@ import javax.persistence.Query;
 /**
  *
  * @author fabricio correa brabo
+ * @param <T>
  */
 public class GenericDAOImpl<T> implements GenericDAO<T> {
 
-    private EntityManager em = (EntityManager) FabricaDAO.obterFabrica().createEntityManager();
+    private EntityManager em;
 
     public GenericDAOImpl() {
+        this.em = (EntityManager) FabricaDAO.obterFabrica().createEntityManager();
     }
 
     @Override
@@ -101,22 +98,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         }
     }
 
-    public List<T> obterTodosOrdenado(Class<T> classe, String atributo) {
-        List<T> resposta = null;
-        try {
-            this.iniciarTransacao();
-            String query = "SELECT c FROM " + classe.getSimpleName() + " c ORDER BY c." + atributo;
-            Query q = this.getEntityManager().createQuery(query);
-            resposta = (List<T>) q.getResultList();
-            return resposta;
-        } catch (Exception e) {
-            if (this.transacaoAberta()) {
-            }
-            return resposta;
-        }
-    }
-
-    private boolean iniciarTransacao() {
+    protected boolean iniciarTransacao() {
         try {
             if (this.getEntityManager().getTransaction().isActive()) {
                 return true;
@@ -128,7 +110,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         }
     }
 
-    private boolean confirmarTransacao() {
+    protected boolean confirmarTransacao() {
         try {
             this.getEntityManager().getTransaction().commit();
             return true;
@@ -137,7 +119,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         }
     }
 
-    private boolean desfazerTransacao() {
+    protected boolean desfazerTransacao() {
         try {
             this.getEntityManager().getTransaction().rollback();
             return true;
@@ -146,7 +128,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         }
     }
 
-    private boolean transacaoAberta() {
+    protected boolean transacaoAberta() {
         try {
             return this.getEntityManager().isOpen();
         } catch (Exception e) {

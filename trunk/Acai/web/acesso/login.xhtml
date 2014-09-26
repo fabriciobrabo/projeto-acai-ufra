@@ -9,14 +9,13 @@
             <form 
                 action="#{request.contextPath}/j_spring_security_check" 
                 method="post">
-                <h:form 
-                    rendered="#{!empty param.error}">
-                    <span style="color: red">  
-                        Erro ao efetuar o login
-                    </span>
-                    <br/>
-                </h:form>
+                <br/>
                 <div align="center">
+                    <center>
+                        <h:outputText rendered="#{param.error}"
+                                      value="Erro ao efetuar login!"
+                                      style="color: darkred"/>
+                    </center>
                     <p:messages 
                         id="mLogin" 
                         showDetail="true" 

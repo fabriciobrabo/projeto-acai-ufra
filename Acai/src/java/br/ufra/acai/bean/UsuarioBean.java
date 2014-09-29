@@ -55,9 +55,7 @@ public class UsuarioBean {
     public String deslogar(){
         return "/acesso/login.xhtml";
     }
-    public String concluirPerfil(){
-        return "/cadastro/perfil/formulario.xhtml";
-    }
+   
     public String visualizarPerfil(){
         return "/cadastro/perfil/lista.xhtml";
     }

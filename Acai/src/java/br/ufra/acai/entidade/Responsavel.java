@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.ufra.acai.entidade;
 
 import java.io.Serializable;
@@ -23,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ufrastic
+ * @author ISARH-UFRA
  */
 @Entity
 @Table(name = "responsavel")

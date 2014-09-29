@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.ufra.acai.entidade;
 
 import java.io.Serializable;
@@ -30,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ufrastic
+ * @author ISARH-UFRA
  */
 @Entity
 @Table(name = "extracao")
@@ -59,12 +58,12 @@ public class Extracao implements Serializable {
     private String observacao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "extracao")
     private List<ItemProduto> itemProdutoList;
-    @JoinColumn(name = "local", referencedColumnName = "local")
-    @ManyToOne(optional = false)
-    private Local local;
     @JoinColumn(name = "produtor", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Produtor produtor;
+    @JoinColumn(name = "local", referencedColumnName = "local")
+    @ManyToOne(optional = false)
+    private Local local;
 
     public Extracao() {
     }
@@ -119,20 +118,20 @@ public class Extracao implements Serializable {
         this.itemProdutoList = itemProdutoList;
     }
 
-    public Local getLocal() {
-        return local;
-    }
-
-    public void setLocal(Local local) {
-        this.local = local;
-    }
-
     public Produtor getProdutor() {
         return produtor;
     }
 
     public void setProdutor(Produtor produtor) {
         this.produtor = produtor;
+    }
+
+    public Local getLocal() {
+        return local;
+    }
+
+    public void setLocal(Local local) {
+        this.local = local;
     }
 
     @Override

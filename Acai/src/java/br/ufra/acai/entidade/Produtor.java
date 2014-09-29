@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.ufra.acai.entidade;
 
 import java.io.Serializable;
@@ -26,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ufrastic
+ * @author ISARH-UFRA
  */
 @Entity
 @Table(name = "produtor")
@@ -72,15 +71,15 @@ public class Produtor implements Serializable {
     private String localizacao;
     @Column(name = "cnpj")
     private String cnpj;
-    @JoinColumn(name = "usuario", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Usuario usuario;
-    @JoinColumn(name = "responsavel", referencedColumnName = "id")
-    @ManyToOne
-    private Responsavel responsavel;
     @JoinColumn(name = "associacao", referencedColumnName = "associacao")
     @ManyToOne
     private Associacao associacao;
+    @JoinColumn(name = "responsavel", referencedColumnName = "id")
+    @ManyToOne
+    private Responsavel responsavel;
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Usuario usuarioId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtor")
     private List<Extracao> extracaoList;
 
@@ -174,12 +173,12 @@ public class Produtor implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Associacao getAssociacao() {
+        return associacao;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setAssociacao(Associacao associacao) {
+        this.associacao = associacao;
     }
 
     public Responsavel getResponsavel() {
@@ -190,12 +189,12 @@ public class Produtor implements Serializable {
         this.responsavel = responsavel;
     }
 
-    public Associacao getAssociacao() {
-        return associacao;
+    public Usuario getUsuarioId() {
+        return usuarioId;
     }
 
-    public void setAssociacao(Associacao associacao) {
-        this.associacao = associacao;
+    public void setUsuarioId(Usuario usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     @XmlTransient

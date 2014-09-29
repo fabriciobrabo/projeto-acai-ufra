@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.ufra.acai.entidade;
 
 import java.io.Serializable;
@@ -27,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ufrastic
+ * @author ISARH-UFRA
  */
 @Entity
 @Table(name = "produto")
@@ -38,7 +37,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Produto.findByPeso", query = "SELECT p FROM Produto p WHERE p.peso = :peso"),
     @NamedQuery(name = "Produto.findByDataVenda", query = "SELECT p FROM Produto p WHERE p.dataVenda = :dataVenda"),
     @NamedQuery(name = "Produto.findByQrcode", query = "SELECT p FROM Produto p WHERE p.qrcode = :qrcode"),
-    @NamedQuery(name = "Produto.findByPrecoVenda", query = "SELECT p FROM Produto p WHERE p.precoVenda = :precoVenda")})
+    @NamedQuery(name = "Produto.findByPrecoVenda", query = "SELECT p FROM Produto p WHERE p.precoVenda = :precoVenda"),
+    @NamedQuery(name = "Produto.findByTipoTransporte", query = "SELECT p FROM Produto p WHERE p.tipoTransporte = :tipoTransporte"),
+    @NamedQuery(name = "Produto.findByQuantidade", query = "SELECT p FROM Produto p WHERE p.quantidade = :quantidade")})
 public class Produto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -57,9 +58,18 @@ public class Produto implements Serializable {
     private String qrcode;
     @Column(name = "preco_venda")
     private BigDecimal precoVenda;
+    @Basic(optional = false)
+    @Column(name = "tipoTransporte")
+    private String tipoTransporte;
+    @Basic(optional = false)
+    @Column(name = "quantidade")
+    private int quantidade;
     @JoinColumn(name = "rasa", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Rasa rasa;
+    @JoinColumn(name = "transportadora_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Transportadora transportadoraId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto")
     private List<ItemProduto> itemProdutoList;
 
@@ -70,10 +80,12 @@ public class Produto implements Serializable {
         this.id = id;
     }
 
-    public Produto(Integer id, BigDecimal peso, String dataVenda) {
+    public Produto(Integer id, BigDecimal peso, String dataVenda, String tipoTransporte, int quantidade) {
         this.id = id;
         this.peso = peso;
         this.dataVenda = dataVenda;
+        this.tipoTransporte = tipoTransporte;
+        this.quantidade = quantidade;
     }
 
     public Integer getId() {
@@ -116,12 +128,36 @@ public class Produto implements Serializable {
         this.precoVenda = precoVenda;
     }
 
+    public String getTipoTransporte() {
+        return tipoTransporte;
+    }
+
+    public void setTipoTransporte(String tipoTransporte) {
+        this.tipoTransporte = tipoTransporte;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
     public Rasa getRasa() {
         return rasa;
     }
 
     public void setRasa(Rasa rasa) {
         this.rasa = rasa;
+    }
+
+    public Transportadora getTransportadoraId() {
+        return transportadoraId;
+    }
+
+    public void setTransportadoraId(Transportadora transportadoraId) {
+        this.transportadoraId = transportadoraId;
     }
 
     @XmlTransient

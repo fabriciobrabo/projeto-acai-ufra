@@ -52,10 +52,14 @@
             </p:layoutUnit>
 
             <p:layoutUnit id="southLayout" position="south">
+                <h:form>
                 <ui:insert name="conteudoSul">
-                    Bottom
+                    <p:commandButton action="#{usuarioBean.deslogar()}"
+                                     value="Sair"
+                                     />
                 </ui:insert>
-            </p:layoutUnit>
+            </h:form>    
+        </p:layoutUnit>
         </p:layout>
     </h:body>
 </html>

@@ -6,11 +6,60 @@
     <h:body>
         <h:form id="menuPrincipal">
             <p:tieredMenu>
-                <p:submenu label="Cadastros">
+                <p:submenu label="Perfil">
                     <p:menuitem 
-                        value="Cadastrar Pedido" 
+                        value="Concluir Perfil" 
                         ajax="false" 
-                        url="#" />
+                        url="#{usuarioBean.concluirPerfil}" />
+                   
+                    <p:menuitem 
+                        value="Visualizar Perfil" 
+                        ajax="false" 
+                        url="" />
+                </p:submenu>
+                <p:submenu label="Local">
+                    <p:menuitem 
+                        value="Incluir" 
+                        ajax="false" 
+                        url="" />
+                    
+                    <p:menuitem 
+                        value="Listar Locais" 
+                        ajax="false" 
+                        url="" />
+                </p:submenu>
+                <p:submenu label="Extração">
+                    <p:menuitem 
+                        value="Incluir" 
+                        ajax="false" 
+                        url="" />
+                    
+                    <p:menuitem 
+                        value="Listar Extrações" 
+                        ajax="false" 
+                        url="" />
+                </p:submenu>
+                  <p:submenu label="Transportadora">
+                    <p:menuitem 
+                        value="Incluir" 
+                        ajax="false" 
+                        url="" />
+                    
+                    <p:menuitem 
+                        value="Listar Transportadoras" 
+                        ajax="false" 
+                        url="" />
+                </p:submenu>
+                  <p:submenu label="Açaí">
+                    <p:menuitem 
+                        value="Nova Venda" 
+                        ajax="false" 
+                        url="" />
+                    
+                    <p:menuitem 
+                        value="Listar Vendas" 
+                        ajax="false" 
+                        url="" />
                 </p:submenu>
             </p:tieredMenu>
         </h:form>

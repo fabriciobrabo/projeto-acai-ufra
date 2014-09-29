@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.ufra.acai.entidade;
 
 import java.io.Serializable;
@@ -25,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ufrastic
+ * @author ISARH-UFRA
  */
 @Entity
 @Table(name = "rasa")
@@ -33,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Rasa.findAll", query = "SELECT r FROM Rasa r"),
     @NamedQuery(name = "Rasa.findById", query = "SELECT r FROM Rasa r WHERE r.id = :id"),
-    @NamedQuery(name = "Rasa.findByCapacidade", query = "SELECT r FROM Rasa r WHERE r.capacidade = :capacidade"),
+    @NamedQuery(name = "Rasa.findByVolume", query = "SELECT r FROM Rasa r WHERE r.volume = :volume"),
     @NamedQuery(name = "Rasa.findByCodigo", query = "SELECT r FROM Rasa r WHERE r.codigo = :codigo"),
     @NamedQuery(name = "Rasa.findByComplemento", query = "SELECT r FROM Rasa r WHERE r.complemento = :complemento")})
 public class Rasa implements Serializable {
@@ -45,8 +44,8 @@ public class Rasa implements Serializable {
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @Column(name = "capacidade")
-    private BigDecimal capacidade;
+    @Column(name = "volume")
+    private BigDecimal volume;
     @Column(name = "codigo")
     private String codigo;
     @Column(name = "complemento")
@@ -61,9 +60,9 @@ public class Rasa implements Serializable {
         this.id = id;
     }
 
-    public Rasa(Integer id, BigDecimal capacidade) {
+    public Rasa(Integer id, BigDecimal volume) {
         this.id = id;
-        this.capacidade = capacidade;
+        this.volume = volume;
     }
 
     public Integer getId() {
@@ -74,12 +73,12 @@ public class Rasa implements Serializable {
         this.id = id;
     }
 
-    public BigDecimal getCapacidade() {
-        return capacidade;
+    public BigDecimal getVolume() {
+        return volume;
     }
 
-    public void setCapacidade(BigDecimal capacidade) {
-        this.capacidade = capacidade;
+    public void setVolume(BigDecimal volume) {
+        this.volume = volume;
     }
 
     public String getCodigo() {

@@ -26,16 +26,15 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author ISARH-UFRA
  */
 @Entity
-@Table(name = "usuario")
+@Table(name = "transportadora")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
-    @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
-    @NamedQuery(name = "Usuario.findByUsername", query = "SELECT u FROM Usuario u WHERE u.username = :username"),
-    @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
-    @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha"),
-    @NamedQuery(name = "Usuario.findByPerfil", query = "SELECT u FROM Usuario u WHERE u.perfil = :perfil")})
-public class Usuario implements Serializable {
+    @NamedQuery(name = "Transportadora.findAll", query = "SELECT t FROM Transportadora t"),
+    @NamedQuery(name = "Transportadora.findById", query = "SELECT t FROM Transportadora t WHERE t.id = :id"),
+    @NamedQuery(name = "Transportadora.findByNome", query = "SELECT t FROM Transportadora t WHERE t.nome = :nome"),
+    @NamedQuery(name = "Transportadora.findByEmail", query = "SELECT t FROM Transportadora t WHERE t.email = :email"),
+    @NamedQuery(name = "Transportadora.findByTelefone", query = "SELECT t FROM Transportadora t WHERE t.telefone = :telefone")})
+public class Transportadora implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,33 +42,29 @@ public class Usuario implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "username")
-    private String username;
+    @Column(name = "nome")
+    private String nome;
     @Basic(optional = false)
     @Column(name = "email")
     private String email;
     @Basic(optional = false)
-    @Column(name = "senha")
-    private String senha;
-    @Basic(optional = false)
-    @Column(name = "perfil")
-    private String perfil;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioId")
-    private List<Produtor> produtorList;
+    @Column(name = "telefone")
+    private String telefone;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "transportadoraId")
+    private List<Produto> produtoList;
 
-    public Usuario() {
+    public Transportadora() {
     }
 
-    public Usuario(Integer id) {
+    public Transportadora(Integer id) {
         this.id = id;
     }
 
-    public Usuario(Integer id, String username, String email, String senha, String perfil) {
+    public Transportadora(Integer id, String nome, String email, String telefone) {
         this.id = id;
-        this.username = username;
+        this.nome = nome;
         this.email = email;
-        this.senha = senha;
-        this.perfil = perfil;
+        this.telefone = telefone;
     }
 
     public Integer getId() {
@@ -80,12 +75,12 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getNome() {
+        return nome;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -96,29 +91,21 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     @XmlTransient
-    public List<Produtor> getProdutorList() {
-        return produtorList;
+    public List<Produto> getProdutoList() {
+        return produtoList;
     }
 
-    public void setProdutorList(List<Produtor> produtorList) {
-        this.produtorList = produtorList;
+    public void setProdutoList(List<Produto> produtoList) {
+        this.produtoList = produtoList;
     }
 
     @Override
@@ -131,10 +118,10 @@ public class Usuario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
+        if (!(object instanceof Transportadora)) {
             return false;
         }
-        Usuario other = (Usuario) object;
+        Transportadora other = (Transportadora) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -143,7 +130,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.acai.entidade.Usuario[ id=" + id + " ]";
+        return "br.ufra.acai.entidade.Transportadora[ id=" + id + " ]";
     }
     
 }

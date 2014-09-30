@@ -14,25 +14,30 @@
 
                 <p:panelGrid id="imPanelLocal" columns="2">
 
-                    <h:outputText value="Nome:"/>
+                    <h:outputText title="Nome para identificar a propriedade do produtor" 
+                                  value="Nome:"/>
                     <p:inputText
                         id="itNomeLocal" 
                         value=""
                         requiredMessage="Campo obrigatório" 
                         required="true"
+                        
                         />
-                    <h:outputText value="Complemento:"/>
+                    <h:outputText value="Localidade:"
+                                  title="Pequena área,regiao ou uma ilha"
+                                  />
+                    <p:inputText
+                        id="itLocalidade" 
+                        value=""                      
+                        />
+                    <h:outputText value="Complemento:"
+                                  title="Informações extras que possam ajudar a identificação"
+                                  />
                     <p:inputText
                         id="itComplemento" 
                         value=""                      
                         />
-                    <h:outputText value="Cidade:"/>
-                    <p:inputText
-                        id="itCidade" 
-                        value=""
-                        requiredMessage="Campo obrigatório" 
-                        required="true"
-                        />
+                    
                     <h:outputText value="Estado:"/>
                     <p:inputText
                         id="itEstado" 
@@ -40,9 +45,16 @@
                         requiredMessage="Campo obrigatório" 
                         required="true"
                         />
-                    <h:outputText value="Coordenadas:"/>
+                    
+                    <h:outputText value="Latitude:"/>
                     <p:inputText
-                        id="itCoordenadas" 
+                        id="itLatitude" 
+                        value=""
+
+                        />
+                    <h:outputText value="Longitude:"/>
+                    <p:inputText
+                        id="itLongitude" 
                         value=""
 
                         />

@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package br.ufra.acai.entidade;
 
 import java.io.Serializable;
@@ -23,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ISARH-UFRA
+ * @author ufrastic
  */
 @Entity
 @Table(name = "usuario")
@@ -54,7 +55,7 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "perfil")
     private String perfil;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Produtor> produtorList;
 
     public Usuario() {

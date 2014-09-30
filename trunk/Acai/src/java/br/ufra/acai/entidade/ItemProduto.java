@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package br.ufra.acai.entidade;
 
 import java.io.Serializable;
@@ -21,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ISARH-UFRA
+ * @author ufrastic
  */
 @Entity
 @Table(name = "item_produto")
@@ -36,12 +37,12 @@ public class ItemProduto implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @JoinColumn(name = "extracao", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Extracao extracao;
     @JoinColumn(name = "produto", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Produto produto;
+    @JoinColumn(name = "extracao", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Extracao extracao;
 
     public ItemProduto() {
     }
@@ -58,20 +59,20 @@ public class ItemProduto implements Serializable {
         this.id = id;
     }
 
-    public Extracao getExtracao() {
-        return extracao;
-    }
-
-    public void setExtracao(Extracao extracao) {
-        this.extracao = extracao;
-    }
-
     public Produto getProduto() {
         return produto;
     }
 
     public void setProduto(Produto produto) {
         this.produto = produto;
+    }
+
+    public Extracao getExtracao() {
+        return extracao;
+    }
+
+    public void setExtracao(Extracao extracao) {
+        this.extracao = extracao;
     }
 
     @Override

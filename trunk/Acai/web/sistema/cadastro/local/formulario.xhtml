@@ -6,76 +6,78 @@
       xmlns:p="http://primefaces.org/ui">
     <ui:composition template="/template/templatePadrao.xhtml">
         <ui:define name="conteudoCentro">
-            <p:panel header="Local">
+            <p:panel header="Local" style="text-align: center">
+                <center>
 
-                <h:inputHidden 
-                    id="imInputLocal" 
-                    value=""/>
+                    <h:inputHidden 
+                        id="imInputLocal" 
+                        value=""/>
 
-                <p:panelGrid id="imPanelLocal" columns="2">
+                    <p:panelGrid id="imPanelLocal" columns="2">
 
-                    <h:outputText title="Nome para identificar a propriedade do produtor" 
-                                  value="Nome:"/>
-                    <p:inputText
-                        id="itNomeLocal" 
-                        value=""
-                        requiredMessage="Campo obrigatório" 
-                        required="true"
-                        
+                        <h:outputText title="Nome para identificar a propriedade do produtor" 
+                                      value="Nome:"/>
+                        <p:inputText
+                            id="itNomeLocal" 
+                            value=""
+                            requiredMessage="Campo obrigatório" 
+                            required="true"
+
+                            />
+                        <h:outputText value="Localidade:"
+                                      title="Pequena área,regiao ou uma ilha"
+                                      />
+                        <p:inputText
+                            id="itLocalidade" 
+                            value=""                      
+                            />
+                        <h:outputText value="Complemento:"
+                                      title="Informações extras que possam ajudar a identificação"
+                                      />
+                        <p:inputText
+                            id="itComplemento" 
+                            value=""                      
+                            />
+
+                        <h:outputText value="Estado:"/>
+                        <p:inputText
+                            id="itEstado" 
+                            value=""
+                            requiredMessage="Campo obrigatório" 
+                            required="true"
+                            />
+
+                        <h:outputText value="Latitude:"/>
+                        <p:inputText
+                            id="itLatitude" 
+                            value=""
+
+                            />
+                        <h:outputText value="Longitude:"/>
+                        <p:inputText
+                            id="itLongitude" 
+                            value=""
+
+                            />
+
+                    </p:panelGrid>
+
+                    <p:commandButton
+                        id="imSalvar"
+                        ajax="false"
+                        icon="ui-icon-check"
+                        value="Salvar"
+                        action="#"/>
+
+                    <p:button
+                        id="imCancelar"
+
+                        icon="ui-icon-closethick"
+                        value="Cancelar"
+                        outcome="/sistema/cadastro/local/lista.xhtml"
                         />
-                    <h:outputText value="Localidade:"
-                                  title="Pequena área,regiao ou uma ilha"
-                                  />
-                    <p:inputText
-                        id="itLocalidade" 
-                        value=""                      
-                        />
-                    <h:outputText value="Complemento:"
-                                  title="Informações extras que possam ajudar a identificação"
-                                  />
-                    <p:inputText
-                        id="itComplemento" 
-                        value=""                      
-                        />
-                    
-                    <h:outputText value="Estado:"/>
-                    <p:inputText
-                        id="itEstado" 
-                        value=""
-                        requiredMessage="Campo obrigatório" 
-                        required="true"
-                        />
-                    
-                    <h:outputText value="Latitude:"/>
-                    <p:inputText
-                        id="itLatitude" 
-                        value=""
 
-                        />
-                    <h:outputText value="Longitude:"/>
-                    <p:inputText
-                        id="itLongitude" 
-                        value=""
-
-                        />
-
-                </p:panelGrid>
-
-                <p:commandButton
-                    id="imSalvar"
-                    ajax="false"
-                    icon="ui-icon-check"
-                    value="Salvar"
-                    action="#"/>
-
-                <p:button
-                    id="imCancelar"
-
-                    icon="ui-icon-closethick"
-                    value="Cancelar"
-                    outcome="/sistema/cadastro/local/lista.xhtml"
-                    />
-
+                </center>
             </p:panel>
 
         </ui:define>

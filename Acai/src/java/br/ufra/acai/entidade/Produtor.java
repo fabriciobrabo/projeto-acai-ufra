@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package br.ufra.acai.entidade;
 
 import java.io.Serializable;
@@ -25,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ISARH-UFRA
+ * @author ufrastic
  */
 @Entity
 @Table(name = "produtor")
@@ -71,15 +72,15 @@ public class Produtor implements Serializable {
     private String localizacao;
     @Column(name = "cnpj")
     private String cnpj;
-    @JoinColumn(name = "associacao", referencedColumnName = "associacao")
-    @ManyToOne
-    private Associacao associacao;
     @JoinColumn(name = "responsavel", referencedColumnName = "id")
     @ManyToOne
     private Responsavel responsavel;
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Usuario usuarioId;
+    @JoinColumn(name = "associacao", referencedColumnName = "associacao")
+    @ManyToOne
+    private Associacao associacao;
+    @JoinColumn(name = "usuario", referencedColumnName = "id")
+    @ManyToOne
+    private Usuario usuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtor")
     private List<Extracao> extracaoList;
 
@@ -173,14 +174,6 @@ public class Produtor implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public Associacao getAssociacao() {
-        return associacao;
-    }
-
-    public void setAssociacao(Associacao associacao) {
-        this.associacao = associacao;
-    }
-
     public Responsavel getResponsavel() {
         return responsavel;
     }
@@ -189,12 +182,20 @@ public class Produtor implements Serializable {
         this.responsavel = responsavel;
     }
 
-    public Usuario getUsuarioId() {
-        return usuarioId;
+    public Associacao getAssociacao() {
+        return associacao;
     }
 
-    public void setUsuarioId(Usuario usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setAssociacao(Associacao associacao) {
+        this.associacao = associacao;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @XmlTransient

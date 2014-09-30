@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package br.ufra.acai.entidade;
 
 import java.io.Serializable;
@@ -26,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ISARH-UFRA
+ * @author ufrastic
  */
 @Entity
 @Table(name = "produto")
@@ -64,12 +65,12 @@ public class Produto implements Serializable {
     @Basic(optional = false)
     @Column(name = "quantidade")
     private int quantidade;
+    @JoinColumn(name = "transportadora", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Transportadora transportadora;
     @JoinColumn(name = "rasa", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Rasa rasa;
-    @JoinColumn(name = "transportadora_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Transportadora transportadoraId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto")
     private List<ItemProduto> itemProdutoList;
 
@@ -144,20 +145,20 @@ public class Produto implements Serializable {
         this.quantidade = quantidade;
     }
 
+    public Transportadora getTransportadora() {
+        return transportadora;
+    }
+
+    public void setTransportadora(Transportadora transportadora) {
+        this.transportadora = transportadora;
+    }
+
     public Rasa getRasa() {
         return rasa;
     }
 
     public void setRasa(Rasa rasa) {
         this.rasa = rasa;
-    }
-
-    public Transportadora getTransportadoraId() {
-        return transportadoraId;
-    }
-
-    public void setTransportadoraId(Transportadora transportadoraId) {
-        this.transportadoraId = transportadoraId;
     }
 
     @XmlTransient

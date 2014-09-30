@@ -1,13 +1,13 @@
 package br.ufra.acai.dao;
 
+import br.ufra.acai.entidade.Produtor;
 import java.util.List;
 
 /**
  *
  * @author ufrastic
- * @param <T>
  */
-public interface ProdutorDAO<T> extends GenericDAO<T> {
+public interface ProdutorDAO {
 
-    public List<T> obterTodosOrdenado(Class<T> classe, String param);
+    public List<Produtor> obterTodosOrdenado(String param);
 }

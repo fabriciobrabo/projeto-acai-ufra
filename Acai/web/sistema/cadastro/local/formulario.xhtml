@@ -6,14 +6,14 @@
       xmlns:p="http://primefaces.org/ui">
     <ui:composition template="/template/templatePadrao.xhtml">
         <ui:define name="conteudoCentro">
-            <p:panel header="Local" style="text-align: center">
-                <center>
+            <p:panel header="Local" >
+                
 
                     <h:inputHidden 
                         id="imInputLocal" 
                         value=""/>
 
-                    <p:panelGrid id="imPanelLocal" columns="2">
+                    <h:panelGrid id="imPanelLocal" columns="2">
 
                         <h:outputText title="Nome para identificar a propriedade do produtor" 
                                       value="Nome:"/>
@@ -60,8 +60,9 @@
 
                             />
 
-                    </p:panelGrid>
-
+                    </h:panelGrid>
+                    <p>
+                        
                     <p:commandButton
                         id="imSalvar"
                         ajax="false"
@@ -74,10 +75,10 @@
 
                         icon="ui-icon-closethick"
                         value="Cancelar"
-                        outcome="/sistema/cadastro/local/lista.xhtml"
+                        outcome="/sistema/inicio.jsf"
                         />
+                    </p>
 
-                </center>
             </p:panel>
 
         </ui:define>

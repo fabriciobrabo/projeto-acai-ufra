@@ -19,7 +19,7 @@ public class ProdutorRNImpl implements ProdutorRN<Produtor> {
 
     @Override
     public List<Produtor> obterTodosOrdenadoNome() {
-        return produtor_dao.obterTodosOrdenado(Produtor.class, "nome");
+        return produtor_dao.obterTodosOrdenado("nome");
     }
 
     @Override

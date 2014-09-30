@@ -16,50 +16,16 @@
     </h:head>
     <h:body>
         <p:layout id="layoutAcai" fullPage="true">
-            <p:layoutUnit 
-                id="topoLayout" 
-                position="north"
-                size="200"
-                >
-                <ui:insert name="conteudoTopo"/>
-            </p:layoutUnit>
-
-            <p:layoutUnit 
-                id="leftLayout" 
-                position="west"
-                size="200"
-                resizable="true"
-                maxSize="300"
-                collapsible="true"
-                closable="false">
-                <h:outputStylesheet 
-                    library="css"
-                    name="cssMenu.css"/>
-                <ui:include src="menu.xhtml"/>
-            </p:layoutUnit>
-
             <p:layoutUnit id="centerLayout" position="center">
+                <ui:include src="menu.xhtml"/>
                 <h:form id="formCentro">
-                    <p:growl
-                        id="growl"
-                        showDetail="true"
-                        sticky="false"
-                        autoUpdate="true"
-                        />
                     <ui:insert name="conteudoCentro"/>
-
                 </h:form>
             </p:layoutUnit>
 
             <p:layoutUnit id="southLayout" position="south">
-                <h:form>
-                <ui:insert name="conteudoSul">
-                    <p:button outcome="/acesso/login.xhtml"
-                                     value="Sair"
-                                     />
-                </ui:insert>
-            </h:form>    
-        </p:layoutUnit>
+                
+            </p:layoutUnit>
         </p:layout>
     </h:body>
 </html>

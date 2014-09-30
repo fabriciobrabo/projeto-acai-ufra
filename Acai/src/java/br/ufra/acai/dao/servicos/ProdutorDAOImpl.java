@@ -5,7 +5,10 @@
  */
 package br.ufra.acai.dao.servicos;
 
+import br.ufra.acai.dao.FabricaDAO;
+import br.ufra.acai.dao.GenericDAO;
 import br.ufra.acai.dao.ProdutorDAO;
+import br.ufra.acai.entidade.Produto;
 import br.ufra.acai.entidade.Produtor;
 import java.util.List;
 import javax.persistence.Query;
@@ -14,21 +17,15 @@ import javax.persistence.Query;
  *
  * @author ufrastic
  */
-public class ProdutorDAOImpl extends GenericDAOImpl<Produtor> implements ProdutorDAO<Produtor> {
+public class ProdutorDAOImpl extends GenericDAOImpl<Produtor> implements ProdutorDAO {
 
     @Override
-    public List<Produtor> obterTodosOrdenado(Class<Produtor> classe, String param) {
+    public List<Produtor> obterTodosOrdenado(String param) {
         List<Produtor> resposta = null;
-        try {
-            String query = "SELECT c FROM " + classe.getSimpleName() + " c ORDER BY c." + param;
-            Query q = this.getEntityManager().createQuery(query);
-            resposta = (List<Produtor>) q.getResultList();
-            return resposta;
-        } catch (Exception e) {
-            if (this.transacaoAberta()) {
-                this.desfazerTransacao();
-            }
-            return resposta;
-        }
+        String query = "SELECT c FROM Produtor c ORDER BY c." + param;
+        Query q = this.getEntityManager().createQuery(query);
+        resposta = (List<Produtor>) q.getResultList();
+        return resposta;
     }
+    
 }

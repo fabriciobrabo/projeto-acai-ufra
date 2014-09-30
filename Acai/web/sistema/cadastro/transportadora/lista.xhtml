@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!--PAGINA RESPONSAVEL PELA LISTAGEM DAS TRANSPORTADORA -->
-<!--<ui:composition 
+
+<ui:composition 
     template="/template/templatePadrao.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -14,35 +14,28 @@
 
 
         <p:dataTable
-            id="imListagemLocal"
+            id="imListagemTransportadora"
             emptyMessage="Nenhum registro"
             value=""
-            var="Transportadora >
+            var="Transportadora" >
 
             <f:facet name="header">
-                <h:outputText value="Locais de Extração do Produtor"/>
+                     <h:outputText value="Lista de Transportadoras"/>
             </f:facet>
 
-            <p:column headerText="Extração">
+            <p:column headerText="Transportadoras">
                 <p:panelGrid columns="2">
 
-                    <h:outputText value="Local:" />
-                    <h:outputText value="" />
-                    
-                    <h:outputText value="Data:" />
+                    <h:outputText value="Nome:" />
                     <h:outputText value="" />
 
-                    <h:outputText value="Peso:" />
+                    <h:outputText value="Email:" />
                     <h:outputText value="" />
 
-                    <h:outputText value="Observação :" />
+                    <h:outputText value="Telefone:" />
                     <h:outputText value="" />
 
-                    
 
-                    <h:outputText value="Coordenadas:" />
-                    <h:outputText value="" />
-                    
                 </p:panelGrid>
             </p:column>
 
@@ -73,6 +66,6 @@
             </p:column>
         </p:dataTable>
     </ui:define>
-</ui:composition>-->
+</ui:composition>
 
 

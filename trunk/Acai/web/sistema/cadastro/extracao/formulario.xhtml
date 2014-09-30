@@ -9,13 +9,12 @@
     <ui:composition template="/template/templatePadrao.xhtml">
         <ui:define name="conteudoCentro">
             <p:panel header="Extração">
-
-                <h:inputHidden 
-                    id="imInputLocal" 
-                    value=""/>
-
-                <h:panelGrid id="imPanelLocal" columns="2">
-                    <h:outputText value="Local:"/>
+                <center>
+                    <h:inputHidden 
+                        id="imInputLocal" 
+                        value=""/>
+                    <h:panelGrid id="imPanelLocal" columns="2">
+                        <h:outputText value="Local:"/>
                         <p:selectOneMenu id="console" value="#">
                             <f:selectItem itemLabel="Selecione" itemValue="" />
                             <f:selectItem itemLabel="Ilha das Onças" itemValue="" />
@@ -28,7 +27,6 @@
                             value=""
                             requiredMessage="Campo obrigatório" 
                             required="true"
-
                             />
                         <h:outputText value="Peso:"/>
                         <p:inputText
@@ -39,29 +37,23 @@
                         <p:inputText
                             id="itObservacao" 
                             value=""
-
                             />
+                    </h:panelGrid>
 
-
-                </h:panelGrid>
-
-                <p:commandButton
-                    id="imSalvar"
-                    ajax="false"
-                    icon="ui-icon-check"
-                    value="Salvar"
-                    action="#"/>
-
-                <p:button
-                    id="imCancelar"
-
-                    icon="ui-icon-closethick"
-                    value="Cancelar"
-                    outcome="/sistema/inicio.jsf"
-                    />
-
+                    <p:commandButton
+                        id="imSalvar"
+                        ajax="false"
+                        icon="ui-icon-check"
+                        value="Salvar"
+                        action="#"/>
+                    <p:button
+                        id="imCancelar"
+                        icon="ui-icon-closethick"
+                        value="Cancelar"
+                        outcome="/sistema/inicio.jsf"
+                        />
             </p:panel>
-
+            </center>
         </ui:define>
     </ui:composition>
 </html>

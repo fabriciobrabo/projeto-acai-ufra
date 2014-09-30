@@ -7,14 +7,11 @@
     <ui:composition template="/template/templatePadrao.xhtml">
         <ui:define name="conteudoCentro">
             <p:panel header="Local" >
-                
-
+                <center>
                     <h:inputHidden 
                         id="imInputLocal" 
                         value=""/>
-
                     <h:panelGrid id="imPanelLocal" columns="2">
-
                         <h:outputText title="Nome para identificar a propriedade do produtor" 
                                       value="Nome:"/>
                         <p:inputText
@@ -22,7 +19,6 @@
                             value=""
                             requiredMessage="Campo obrigatório" 
                             required="true"
-
                             />
                         <h:outputText value="Localidade:"
                                       title="Pequena área,regiao ou uma ilha"
@@ -38,7 +34,6 @@
                             id="itComplemento" 
                             value=""                      
                             />
-
                         <h:outputText value="Estado:"/>
                         <p:inputText
                             id="itEstado" 
@@ -46,41 +41,35 @@
                             requiredMessage="Campo obrigatório" 
                             required="true"
                             />
-
                         <h:outputText value="Latitude:"/>
                         <p:inputText
                             id="itLatitude" 
                             value=""
-
                             />
                         <h:outputText value="Longitude:"/>
                         <p:inputText
                             id="itLongitude" 
                             value=""
-
                             />
 
                     </h:panelGrid>
                     <p>
-                        
-                    <p:commandButton
-                        id="imSalvar"
-                        ajax="false"
-                        icon="ui-icon-check"
-                        value="Salvar"
-                        action="#"/>
+                        <p:commandButton
+                            id="imSalvar"
+                            ajax="false"
+                            icon="ui-icon-check"
+                            value="Salvar"
+                            action="#"/>
+                        <p:button
+                            id="imCancelar"
 
-                    <p:button
-                        id="imCancelar"
-
-                        icon="ui-icon-closethick"
-                        value="Cancelar"
-                        outcome="/sistema/inicio.jsf"
-                        />
+                            icon="ui-icon-closethick"
+                            value="Cancelar"
+                            outcome="/sistema/inicio.jsf"
+                            />
                     </p>
-
+                </center>
             </p:panel>
-
         </ui:define>
     </ui:composition>
 </html>

@@ -73,33 +73,19 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         if (id == null) {
             return null;
         }
-        try {
-            String query = classe.getSimpleName() + ".findById";
-            final Query q = this.getEntityManager().createNamedQuery(query);
-            T t = (T) q.setParameter("id", id).getSingleResult();
-            return t;
-        } catch (Exception e) {
-            if (this.transacaoAberta()) {
-                this.desfazerTransacao();
-            }
-            return null;
-        }
+        String query = classe.getSimpleName() + ".findById";
+        final Query q = this.getEntityManager().createNamedQuery(query);
+        T t = (T) q.setParameter("id", id).getSingleResult();
+        return t;
     }
 
     @Override
     public List<T> obterTodos(Class<T> classe) {
         List<T> resposta = null;
-        try {
-            String query = classe.getSimpleName() + ".findAll";
-            Query q = this.getEntityManager().createNamedQuery(query);
-            resposta = (List<T>) q.getResultList();
-            return resposta;
-        } catch (Exception e) {
-            if (this.transacaoAberta()) {
-                this.desfazerTransacao();
-            }
-            return resposta;
-        }
+        String query = classe.getSimpleName() + ".findAll";
+        Query q = this.getEntityManager().createNamedQuery(query);
+        resposta = q.getResultList();
+        return resposta;
     }
 
     protected boolean iniciarTransacao() {

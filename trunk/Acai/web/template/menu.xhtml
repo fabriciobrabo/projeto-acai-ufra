@@ -5,63 +5,72 @@
       xmlns:p="http://primefaces.org/ui">
     <h:body>
         <h:form id="menuPrincipal">
-            <p:tieredMenu style="width: 180px">
+            <p:menubar>
                 <p:submenu label="Perfil">
                     <p:menuitem 
                         value="Concluir Perfil" 
                         ajax="false" 
-                        url ="/sistema/cadastro/perfil/formulario.jsf" />
-                   
+                        outcome="/sistema/cadastro/perfil/formulario.jsf" />
+
                     <p:menuitem 
                         value="Visualizar Perfil" 
                         ajax="false" 
-                        url="/sistema/cadastro/perfil/lista.jsf" />
+                        outcome="/sistema/cadastro/perfil/lista.jsf" />
                 </p:submenu>
+
                 <p:submenu label="Local">
                     <p:menuitem 
                         value="Incluir" 
                         ajax="false" 
-                        url="/sistema/cadastro/local/formulario.jsf" />
-                    
+                        outcome="/sistema/cadastro/local/formulario.jsf" />
+
                     <p:menuitem 
                         value="Listar Locais" 
                         ajax="false" 
-                        url="/sistema/cadastro/local/lista.jsf" />
+                        outcome="/sistema/cadastro/local/lista.jsf" />
                 </p:submenu>
+
                 <p:submenu label="Extração">
                     <p:menuitem 
                         value="Incluir" 
                         ajax="false" 
-                        url="/sistema/cadastro/extracao/formulario.jsf" />
-                    
+                        outcome="/sistema/cadastro/extracao/formulario.jsf" />
+
                     <p:menuitem 
                         value="Listar Extrações" 
                         ajax="false" 
-                        url="/sistema/cadastro/extracao/lista.jsf" />
+                        outcome="/sistema/cadastro/extracao/lista.jsf" />
                 </p:submenu>
+                
                 <p:submenu label="Transportadora">
                     <p:menuitem 
                         value="Incluir" 
                         ajax="false" 
-                        url="/sistema/cadastro/transportadora/formulario.jsf" />
-                    
+                        outcome="/sistema/cadastro/transportadora/formulario.jsf" />
+
                     <p:menuitem 
                         value="Listar Transportadoras" 
                         ajax="false" 
-                        url="/sistema/cadastro/transportadora/lista.jsf" />
+                        outcome="/sistema/cadastro/transportadora/lista.jsf" />
                 </p:submenu>
+                
                 <p:submenu label="Açaí">
                     <p:menuitem 
                         value="Nova Venda" 
-                        ajax="false" 
-                        url="/sistema/cadastro/acai/formulario.jsf" />
-                    
+                        ajax="false"
+                        outcome="/sistema/cadastro/acai/formulario.jsf" />
+
                     <p:menuitem 
                         value="Listar Vendas" 
                         ajax="false" 
-                        url="/sistema/cadastro/acai/lista.jsf" />
+                        outcome="/sistema/cadastro/acai/lista.jsf" />
                 </p:submenu>
-            </p:tieredMenu>
+                
+                <p:menuitem
+                    icon="ui-icon-power"
+                    ajax="false"
+                    outcome="/acesso/login.xhtml"/>
+            </p:menubar>
         </h:form>
     </h:body>
 </html>

@@ -1,5 +1,8 @@
 package br.ufra.acai.dao;
 
+import br.ufra.acai.dao.servicos.GenericDAOImpl;
+import br.ufra.acai.dao.servicos.ProdutorDAOImpl;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -25,5 +28,17 @@ public class FabricaDAO {
         }
         fabrica = Persistence.createEntityManagerFactory(unidadePersistencia);
         return fabrica;
+    }
+    
+    public static EntityManager criarEntityManager() {
+        return fabrica.createEntityManager();
+    }
+    
+    public static ProdutorDAO criarProdutorDAO() {
+        return new ProdutorDAOImpl();
+    }
+    
+    public static GenericDAO criarGenericDAO() {
+        return new GenericDAOImpl();
     }
 }

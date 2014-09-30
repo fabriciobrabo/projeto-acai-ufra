@@ -32,4 +32,8 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <context-param>  
+        <param-name>primefaces.THEME</param-name>  
+        <param-value>rocket</param-value>  
+    </context-param>  
 </web-app>

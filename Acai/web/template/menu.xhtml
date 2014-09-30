@@ -41,7 +41,7 @@
                         ajax="false" 
                         outcome="/sistema/cadastro/extracao/lista.jsf" />
                 </p:submenu>
-                
+
                 <p:submenu label="Transportadora">
                     <p:menuitem 
                         value="Incluir" 
@@ -53,7 +53,7 @@
                         ajax="false" 
                         outcome="/sistema/cadastro/transportadora/lista.jsf" />
                 </p:submenu>
-                
+
                 <p:submenu label="Açaí">
                     <p:menuitem 
                         value="Nova Venda" 
@@ -65,11 +65,14 @@
                         ajax="false" 
                         outcome="/sistema/cadastro/acai/lista.jsf" />
                 </p:submenu>
-                
+
                 <p:menuitem
                     icon="ui-icon-power"
                     ajax="false"
-                    outcome="/acesso/login.xhtml"/>
+                    outcome="/acesso/login.jsf"
+                    >
+                    <a href="j_spring_security_logout" />
+                </p:menuitem>
             </p:menubar>
         </h:form>
     </h:body>

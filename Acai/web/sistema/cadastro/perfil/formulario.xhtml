@@ -7,91 +7,93 @@
       >
     <ui:composition template="/template/templatePadrao.xhtml">
         <ui:define name="conteudoCentro">
-            <p:panel header="Perfil do Produtor">
+            <p:panel header="Perfil do Produtor" style="text-align: center">
+                <center>
 
-                <h:inputHidden 
-                    id="imInputProdutor" 
-                    value=""/>
-
-                <h:panelGrid id="imPanelUsuario" columns="3">
-
-                    <h:outputText value="Nome:"/>
-                    <p:inputText
-                        id="itNome" 
-                        value=""
-                        requiredMessage="Campo Obrigatório." 
-                        required="true"/>
-                    <p:message id="msgNome" for="itNome"/>
-
-                    <h:outputText value="Sobrenome:"/>
-                    <p:inputText
-                        id="itSobrenome" 
-                        value=""
-                        requiredMessage="Campo Obrigatório." 
-                        required="true"/>
-                    <p:message id="msgSobrenome" for="itSobrenome"/>
-
-                    <h:outputText value="RG:"/>
-                    <p:inputText
-                        id="itRG" 
-                        value=""
-                        requiredMessage="Campo obrigatório" 
-                        required="true"/>
-                    <p:message id="msgRG" for="itRG"/>
-
-                    <h:outputText value="CPF:"/>
-                    <p:inputText
-                        id="itCPF"
-                        value=""
-                        requiredMessage="Campo obrigatório" 
-                        required="true"/>
-                    <p:message id="msgCPF" for="itCPF"/>
-
-                    <h:outputText value="Telefone:"/>
-                    <p:inputText
-                        id="itTelefone" 
-                        value=""
-                        requiredMessage="Campo obrigatório" 
-                        required="true"/>
-                    <p:message id="msgTelefone" for="itTelefone"/>
-
-                    <h:outputText value="Email de Contato:"/>
-                    <p:inputText
-                        id="itEmail" 
-                        value=""
-                        requiredMessage="Campo obrigatório" 
-                        required="true"/>
-                    <p:message id="msgEmail" for="itEmail"/>
-
-                    <h:outputText value="Localização:"/>
-                    <p:inputText
-                        id="itLocalizacao" 
-                        value=""
-                        requiredMessage="Campo obrigatório" 
-                        required="true"/>
-                    <p:message id="msgLocalizacao" for="itLocalizacao"/>
-
-                    <h:outputText value="CNPJ:"/>
-                    <p:inputText
-                        id="itCNPJ" 
+                    <h:inputHidden 
+                        id="imInputProdutor" 
                         value=""/>
-                    <p:message id="msmCNPJ" for="itCNPJ"/>
-                </h:panelGrid>
-                
-                <p>
-                    <p:commandButton
-                        id="imSalvar"
-                        ajax="false"
-                        icon="ui-icon-check"
-                        value="Salvar"
-                        action="#{usuarioBean.salvar}"/>
 
-                    <p:button
-                        id="imCancelar"
-                        icon="ui-icon-closethick"
-                        value="Cancelar"
-                        outcome="/sistema/inicio.jsf"/>
-                </p>
+                    <h:panelGrid id="imPanelUsuario" columns="3">
+
+                        <h:outputText value="Nome:"/>
+                        <p:inputText
+                            id="itNome" 
+                            value=""
+                            requiredMessage="Campo Obrigatório." 
+                            required="true"/>
+                        <p:message id="msgNome" for="itNome"/>
+
+                        <h:outputText value="Sobrenome:"/>
+                        <p:inputText
+                            id="itSobrenome" 
+                            value=""
+                            requiredMessage="Campo Obrigatório." 
+                            required="true"/>
+                        <p:message id="msgSobrenome" for="itSobrenome"/>
+
+                        <h:outputText value="RG:"/>
+                        <p:inputText
+                            id="itRG" 
+                            value=""
+                            requiredMessage="Campo obrigatório" 
+                            required="true"/>
+                        <p:message id="msgRG" for="itRG"/>
+
+                        <h:outputText value="CPF:"/>
+                        <p:inputText
+                            id="itCPF"
+                            value=""
+                            requiredMessage="Campo obrigatório" 
+                            required="true"/>
+                        <p:message id="msgCPF" for="itCPF"/>
+
+                        <h:outputText value="Telefone:"/>
+                        <p:inputText
+                            id="itTelefone" 
+                            value=""
+                            requiredMessage="Campo obrigatório" 
+                            required="true"/>
+                        <p:message id="msgTelefone" for="itTelefone"/>
+
+                        <h:outputText value="Email de Contato:"/>
+                        <p:inputText
+                            id="itEmail" 
+                            value=""
+                            requiredMessage="Campo obrigatório" 
+                            required="true"/>
+                        <p:message id="msgEmail" for="itEmail"/>
+
+                        <h:outputText value="Localização:"/>
+                        <p:inputText
+                            id="itLocalizacao" 
+                            value=""
+                            requiredMessage="Campo obrigatório" 
+                            required="true"/>
+                        <p:message id="msgLocalizacao" for="itLocalizacao"/>
+
+                        <h:outputText value="CNPJ:"/>
+                        <p:inputText
+                            id="itCNPJ" 
+                            value=""/>
+                        <p:message id="msmCNPJ" for="itCNPJ"/>
+                    </h:panelGrid>
+
+                    <p>
+                        <p:commandButton
+                            id="imSalvar"
+                            ajax="false"
+                            icon="ui-icon-check"
+                            value="Salvar"
+                            action="#{usuarioBean.salvar}"/>
+
+                        <p:button
+                            id="imCancelar"
+                            icon="ui-icon-closethick"
+                            value="Cancelar"
+                            outcome="/sistema/inicio.jsf"/>
+                    </p>
+                </center>
             </p:panel>
         </ui:define>
     </ui:composition>

@@ -7,53 +7,43 @@
     <ui:composition template="/template/templatePadrao.xhtml">
         <ui:define name="conteudoCentro">
             <p:panel header="Transportadora">
+                <center>
+                    <h:inputHidden 
+                        id="imInputLocal" 
+                        value=""/>
+                    <p:panelGrid id="imPanelLocal" columns="2">
 
-                <h:inputHidden 
-                    id="imInputLocal" 
-                    value=""/>
+                        <h:outputText value="Nome:"/>
+                        <p:inputText
+                            id="itData" 
+                            value=""
+                            requiredMessage="Campo obrigatório" 
+                            required="true"/>
+                        <h:outputText value="Email:"/>
+                        <p:inputText
+                            id="itPeso" 
+                            value=""                      
+                            />
+                        <h:outputText value="Telefone:"/>
+                        <p:inputText
+                            id="itObservacao" 
+                            value=""/>
+                    </p:panelGrid>
 
-                <p:panelGrid id="imPanelLocal" columns="2">
-
-                    <h:outputText value="Nome:"/>
-                    <p:inputText
-                        id="itData" 
-                        value=""
-                        requiredMessage="Campo obrigatório" 
-                        required="true"
-
+                    <p:commandButton
+                        id="imSalvar"
+                        ajax="false"
+                        icon="ui-icon-check"
+                        value="Salvar"
+                        action="#"/>
+                    <p:button
+                        id="imCancelar"
+                        icon="ui-icon-closethick"
+                        value="Cancelar"
+                        outcome="/sistema/inicio.jsf"
                         />
-                    <h:outputText value="Email:"/>
-                    <p:inputText
-                        id="itPeso" 
-                        value=""                      
-                        />
-                    <h:outputText value="Telefone:"/>
-                    <p:inputText
-                        id="itObservacao" 
-                        value=""
-
-                        />
-
-
-                </p:panelGrid>
-
-                <p:commandButton
-                    id="imSalvar"
-                    ajax="false"
-                    icon="ui-icon-check"
-                    value="Salvar"
-                    action="#"/>
-
-                <p:button
-                    id="imCancelar"
-
-                    icon="ui-icon-closethick"
-                    value="Cancelar"
-                    outcome="/sistema/inicio.jsf"
-                    />
-
+                </center>
             </p:panel>
-
         </ui:define>
     </ui:composition>
 </html>

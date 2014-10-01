@@ -7,7 +7,7 @@ import java.util.List;
  * @author ufrastic
  * @param <T>
  */
-public interface ProdutorRN<T> extends GenericRN<T> {
+public interface ProdutorRN<T>{
 
     public List<T> obterTodosOrdenadoNome();
 }

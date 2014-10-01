@@ -65,14 +65,10 @@
                         ajax="false" 
                         outcome="/sistema/cadastro/acai/lista.jsf" />
                 </p:submenu>
-
                 <p:menuitem
                     icon="ui-icon-power"
-                    ajax="false"
-                    outcome="/acesso/login.jsf"
-                    >
-                    <a href="j_spring_security_logout" />
-                </p:menuitem>
+                    onclick="document.location = '#{request.contextPath}/j_spring_security_logout'"
+                    title="Sair"/>
             </p:menubar>
         </h:form>
     </h:body>

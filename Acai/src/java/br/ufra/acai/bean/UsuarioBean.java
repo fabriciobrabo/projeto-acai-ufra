@@ -8,9 +8,7 @@ package br.ufra.acai.bean;
 import br.ufra.acai.bean.util.BeanUtil;
 import br.ufra.acai.entidade.Produtor;
 import br.ufra.acai.entidade.Usuario;
-import br.ufra.acai.rn.servicos.ProdutorRNImpl;
 import br.ufra.acai.rn.servicos.UsuarioRNImpl;
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -21,7 +19,6 @@ import javax.faces.bean.RequestScoped;
 public class UsuarioBean {
 
     private final UsuarioRNImpl rn_usuario = new UsuarioRNImpl();
-    private final ProdutorRNImpl rn_produtor = new ProdutorRNImpl();
     private Usuario usuario = new Usuario();
     private Produtor produtor = new Produtor();
     private List<Usuario> usuarios;
@@ -35,7 +32,7 @@ public class UsuarioBean {
     }
 
     public List<Usuario> getUsuarios() {
-        usuarios = rn_usuario.obterTodos(Usuario.class);
+        usuarios = rn_usuario.obterTodos();
         return usuarios;
     }
 
@@ -48,13 +45,7 @@ public class UsuarioBean {
     }
 
     public String salvar() {
-        usuario.setPerfil("ROLE_USER");
-        if (usuario.getProdutorList() == null) {
-            usuario.setProdutorList(new ArrayList<Produtor>());
-        }
-        usuario.getProdutorList().add(produtor);
-        produtor.setUsuario(usuario);
-        if (rn_usuario.salvar(usuario)) {
+        if (rn_usuario.salvar(usuario, produtor)) {
             BeanUtil.mensagem(FacesMessage.SEVERITY_INFO, "Sucesso! O usuário"
                     + produtor.getNome() + " " + produtor.getSobrenome() + " foi cadastrado");
             return "/acesso/login.jsf";

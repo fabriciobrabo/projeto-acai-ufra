@@ -21,12 +21,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ufrastic
+ * @author bpmlab
  */
 @Entity
 @Table(name = "produtor")
@@ -50,26 +52,42 @@ public class Produtor implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "nome")
     private String nome;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "sobrenome")
     private String sobrenome;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "rg")
     private String rg;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "cpf")
     private String cpf;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "telefone")
     private String telefone;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="E-mail inválido")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "email")
     private String email;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "localizacao")
     private String localizacao;
+    @Size(max = 45)
     @Column(name = "cnpj")
     private String cnpj;
     @JoinColumn(name = "responsavel", referencedColumnName = "id")
@@ -81,6 +99,8 @@ public class Produtor implements Serializable {
     @JoinColumn(name = "usuario", referencedColumnName = "id")
     @ManyToOne
     private Usuario usuario;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtor")
+    private List<Rasa> rasaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtor")
     private List<Extracao> extracaoList;
 
@@ -196,6 +216,15 @@ public class Produtor implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    @XmlTransient
+    public List<Rasa> getRasaList() {
+        return rasaList;
+    }
+
+    public void setRasaList(List<Rasa> rasaList) {
+        this.rasaList = rasaList;
     }
 
     @XmlTransient

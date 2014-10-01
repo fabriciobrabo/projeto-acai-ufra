@@ -18,6 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -36,6 +38,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Local.findByEstado", query = "SELECT l FROM Local l WHERE l.estado = :estado"),
     @NamedQuery(name = "Local.findByCoordenadas", query = "SELECT l FROM Local l WHERE l.coordenadas = :coordenadas")})
 public class Local implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "localidade")
+    private String localidade;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "latitude")
+    private Float latitude;
+    @Column(name = "longitude")
+    private Float longitude;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -152,6 +164,30 @@ public class Local implements Serializable {
     @Override
     public String toString() {
         return "br.ufra.acai.entidade.Local[ local=" + local + " ]";
+    }
+
+    public String getLocalidade() {
+        return localidade;
+    }
+
+    public void setLocalidade(String localidade) {
+        this.localidade = localidade;
+    }
+
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
+    }
+
+    public Float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
     }
     
 }

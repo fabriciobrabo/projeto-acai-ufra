@@ -16,16 +16,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ufrastic
+ * @author bpmlab
  */
 @Entity
 @Table(name = "rasa")
@@ -45,14 +49,20 @@ public class Rasa implements Serializable {
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
+    @NotNull
     @Column(name = "volume")
     private BigDecimal volume;
+    @Size(max = 45)
     @Column(name = "codigo")
     private String codigo;
+    @Size(max = 100)
     @Column(name = "complemento")
     private String complemento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rasa")
     private List<Produto> produtoList;
+    @JoinColumn(name = "produtor", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Produtor produtor;
 
     public Rasa() {
     }
@@ -105,6 +115,14 @@ public class Rasa implements Serializable {
 
     public void setProdutoList(List<Produto> produtoList) {
         this.produtoList = produtoList;
+    }
+
+    public Produtor getProdutor() {
+        return produtor;
+    }
+
+    public void setProdutor(Produtor produtor) {
+        this.produtor = produtor;
     }
 
     @Override

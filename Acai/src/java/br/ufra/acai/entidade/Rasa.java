@@ -22,8 +22,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -49,13 +47,10 @@ public class Rasa implements Serializable {
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @NotNull
     @Column(name = "volume")
     private BigDecimal volume;
-    @Size(max = 45)
     @Column(name = "codigo")
     private String codigo;
-    @Size(max = 100)
     @Column(name = "complemento")
     private String complemento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rasa")

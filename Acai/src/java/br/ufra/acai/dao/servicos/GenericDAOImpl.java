@@ -24,11 +24,8 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
     public boolean criar(T o) {
         try {
             this.iniciarTransacao();
-            System.out.println("chegou aqui");
-            this.getEntityManager().persist(this.getEntityManager().merge(o));
-            System.out.println("chegou aqui 2");
+            this.getEntityManager().persist(o);
             this.confirmarTransacao();
-            System.out.println("chegou aqui 3");
             return true;
         } catch (Exception e) {
             if (this.transacaoAberta()) {

@@ -46,7 +46,7 @@ public class UsuarioBean {
 
     public String salvar() {
         if (rn_usuario.salvar(usuario, produtor)) {
-            BeanUtil.mensagem(FacesMessage.SEVERITY_INFO, "Sucesso! O usuário"
+            BeanUtil.mensagem(FacesMessage.SEVERITY_INFO, "Sucesso! O usuário "
                     + produtor.getNome() + " " + produtor.getSobrenome() + " foi cadastrado");
             return "/acesso/login.jsf";
         } else {

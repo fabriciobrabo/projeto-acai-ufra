@@ -1,5 +1,3 @@
--- MySQL Workbench Forward Engineering
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
@@ -8,10 +6,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- Schema acai
 -- -----------------------------------------------------
 DROP SCHEMA IF EXISTS `acai` ;
-
--- -----------------------------------------------------
--- Schema acai
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `acai` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 USE `acai` ;
 
@@ -81,11 +75,11 @@ CREATE TABLE IF NOT EXISTS `acai`.`produtor` (
   `cnpj` VARCHAR(45) NULL,
   `associacao` INT NULL,
   `responsavel` INT NULL,
-  `usuario_id` INT NOT NULL,
+  `usuario` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Produtor_Associacao1_idx` (`associacao` ASC),
   INDEX `fk_produtor_Responsavel1_idx` (`responsavel` ASC),
-  INDEX `fk_produtor_usuario1_idx` (`usuario_id` ASC),
+  INDEX `fk_produtor_usuario1_idx` (`usuario` ASC),
   CONSTRAINT `fk_Produtor_Associacao1`
     FOREIGN KEY (`associacao`)
     REFERENCES `acai`.`associacao` (`associacao`)
@@ -97,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `acai`.`produtor` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_produtor_usuario1`
-    FOREIGN KEY (`usuario_id`)
+    FOREIGN KEY (`usuario`)
     REFERENCES `acai`.`usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -112,10 +106,11 @@ DROP TABLE IF EXISTS `acai`.`local` ;
 CREATE TABLE IF NOT EXISTS `acai`.`local` (
   `local` INT NOT NULL,
   `nome` VARCHAR(45) NOT NULL,
+  `localidade` VARCHAR(45) NOT NULL,
   `complemento` LONGTEXT NULL,
-  `cidade` VARCHAR(45) NOT NULL,
   `estado` VARCHAR(45) NOT NULL,
-  `coordenadas` VARCHAR(45) NULL,
+  `latitude` FLOAT NULL,
+  `longitude` FLOAT NULL,
   PRIMARY KEY (`local`))
 ENGINE = InnoDB;
 
@@ -130,11 +125,13 @@ CREATE TABLE IF NOT EXISTS `acai`.`extracao` (
   `data_colheita` DATETIME NOT NULL,
   `produtor` INT NOT NULL,
   `peso` DECIMAL(6,3) NULL COMMENT 'quantidade aproximada de açai colhido',
-  `observacao` VARCHAR(45) NULL COMMENT 'quantidade de cachos; \nse todos estavam maduros; \netc...\n',
+  `observacao` VARCHAR(45) NULL COMMENT 'quantidade de cachos; ' /* comment truncated */ /*se todos estavam maduros; 
+etc...
+*/,
   `local` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Acai_Produtor1_idx` (`produtor` ASC),
-  INDEX `fk_extracao_local1` (`local` ASC),
+  INDEX `fk_extracao_local1_idx` (`local` ASC),
   CONSTRAINT `fk_Acai_Produtor1`
     FOREIGN KEY (`produtor`)
     REFERENCES `acai`.`produtor` (`id`)
@@ -183,24 +180,25 @@ DROP TABLE IF EXISTS `acai`.`produto` ;
 
 CREATE TABLE IF NOT EXISTS `acai`.`produto` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `peso` DECIMAL(6,3) NOT NULL COMMENT 'quantidade em quilogramas de açai neste produto\nobs: não pode ser maior que a capacidade da rasa',
+  `peso` DECIMAL(6,3) NOT NULL COMMENT 'quantidade em quilogramas de açai neste produt' /* comment truncated */ /*
+obs: não pode ser maior que a capacidade da rasa*/,
   `data_venda` VARCHAR(45) NOT NULL COMMENT 'data que foi o produto foi posto a venda',
   `qrcode` VARCHAR(45) NULL,
   `preco_venda` DECIMAL(6,2) NULL COMMENT 'reço pelo qual foi vendido',
   `rasa` INT NOT NULL,
   `tipoTransporte` VARCHAR(45) NOT NULL,
   `quantidade` INT NOT NULL,
-  `transportadora_id` INT NOT NULL,
+  `transportadora` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_produto_rasa1_idx` (`rasa` ASC),
-  INDEX `fk_produto_transportadora1_idx` (`transportadora_id` ASC),
+  INDEX `fk_produto_transportadora1_idx` (`transportadora` ASC),
   CONSTRAINT `fk_produto_rasa1`
     FOREIGN KEY (`rasa`)
     REFERENCES `acai`.`rasa` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_produto_transportadora1`
-    FOREIGN KEY (`transportadora_id`)
+    FOREIGN KEY (`transportadora`)
     REFERENCES `acai`.`transportadora` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -217,8 +215,8 @@ CREATE TABLE IF NOT EXISTS `acai`.`item_produto` (
   `extracao` INT NOT NULL,
   `produto` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_item_produto_extracao1` (`extracao` ASC),
-  INDEX `fk_item_produto_produto1` (`produto` ASC),
+  INDEX `fk_item_produto_extracao1_idx` (`extracao` ASC),
+  INDEX `fk_item_produto_produto1_idx` (`produto` ASC),
   CONSTRAINT `fk_item_produto_extracao1`
     FOREIGN KEY (`extracao`)
     REFERENCES `acai`.`extracao` (`id`)

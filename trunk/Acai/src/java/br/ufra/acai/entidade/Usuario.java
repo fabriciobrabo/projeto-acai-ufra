@@ -116,9 +116,6 @@ public class Usuario implements Serializable {
 
     @XmlTransient
     public List<Produtor> getProdutorList() {
-        if (produtorList == null) {
-            produtorList = new ArrayList<>();
-        }
         return produtorList;
     }
 

@@ -45,9 +45,14 @@
             </form>
             <h:form>
                 <div align="center">
-                    <p:commandLink 
-                        value="Criar uma conta!" 
-                        ajax="false" 
+                    <h:outputLabel
+                        value="Criar uma Conta?"
+                        style="font-size: 16px"
+                        for="clClick"/>
+                    <h:commandLink
+                        id="clClick"
+                        style="color: blue; font-size: 16px"
+                        value="Clique Aqui!"
                         action="/acesso/cadastro/formulario.jsf"/>
                 </div>
                 <br/>

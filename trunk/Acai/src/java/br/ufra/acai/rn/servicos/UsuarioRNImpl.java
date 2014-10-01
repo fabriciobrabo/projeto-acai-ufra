@@ -1,6 +1,7 @@
 package br.ufra.acai.rn.servicos;
 
 import br.ufra.acai.dao.servicos.UsuarioDAOImpl;
+import br.ufra.acai.entidade.Produtor;
 import br.ufra.acai.entidade.Usuario;
 import br.ufra.acai.rn.UsuarioRN;
 import java.util.List;
@@ -17,33 +18,33 @@ public class UsuarioRNImpl implements UsuarioRN<Usuario> {
         usuario_dao = new UsuarioDAOImpl();
     }
 
-    @Override
     public Usuario obter(String acesso) {
         return usuario_dao.obter(acesso);
     }
 
-    @Override
-    public boolean salvar(Usuario t) {
-        if (t.getId() == null) {
-            return usuario_dao.criar(t);
+    public boolean salvar(Usuario t, Produtor o) {
+        if (t.getProdutorList().isEmpty()) {
+            t.getProdutorList().add(o);
+            if (t.getId() == null) {
+                return usuario_dao.criar(t);
+            } else {
+                return usuario_dao.atualizar(t);
+            }
         } else {
-            return usuario_dao.atualizar(t);
+            return false;
         }
     }
 
-    @Override
     public boolean remover(Usuario t) {
         return usuario_dao.excluir(t);
     }
 
-    @Override
-    public Usuario obter(Class<Usuario> classe, Object id) {
-        return usuario_dao.obter(classe, id);
+    public Usuario obter(Object id) {
+        return usuario_dao.obter(Usuario.class, id);
     }
 
-    @Override
-    public List<Usuario> obterTodos(Class<Usuario> classe) {
-        return usuario_dao.obterTodos(classe);
+    public List<Usuario> obterTodos() {
+        return usuario_dao.obterTodos(Usuario.class);
     }
 
 }

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.ufra.acai.entidade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha"),
     @NamedQuery(name = "Usuario.findByPerfil", query = "SELECT u FROM Usuario u WHERE u.perfil = :perfil")})
 public class Usuario implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -115,6 +116,9 @@ public class Usuario implements Serializable {
 
     @XmlTransient
     public List<Produtor> getProdutorList() {
+        if (produtorList == null) {
+            produtorList = new ArrayList<>();
+        }
         return produtorList;
     }
 
@@ -146,5 +150,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "br.ufra.acai.entidade.Usuario[ id=" + id + " ]";
     }
-    
+
 }

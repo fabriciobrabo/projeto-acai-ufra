@@ -9,6 +9,11 @@
 	 
     <http auto-config="true">
         <intercept-url pattern="/sistema/inicio.jsf" access="ROLE_USER" />
+        <intercept-url pattern="/sistema/cadastro/acai/*.jsf" access="ROLE_USER" />
+        <intercept-url pattern="/sistema/cadastro/extracao/*.jsf" access="ROLE_USER" />
+        <intercept-url pattern="/sistema/cadastro/local/*.jsf" access="ROLE_USER" />
+        <intercept-url pattern="/sistema/cadastro/perfil/*.jsf" access="ROLE_USER" />
+        <intercept-url pattern="/sistema/cadastro/transportadora/*.jsf" access="ROLE_USER" />
         <form-login 
             login-page="/acesso/login.jsf" 
             authentication-failure-url="/acesso/login.jsf?error=true"

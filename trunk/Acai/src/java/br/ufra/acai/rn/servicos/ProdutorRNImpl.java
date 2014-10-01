@@ -22,7 +22,6 @@ public class ProdutorRNImpl implements ProdutorRN<Produtor> {
         return produtor_dao.obterTodosOrdenado("nome");
     }
 
-    @Override
     public boolean salvar(Produtor t) {
         if (t.getId() == null) {
             return produtor_dao.criar(t);
@@ -31,17 +30,14 @@ public class ProdutorRNImpl implements ProdutorRN<Produtor> {
         }
     }
 
-    @Override
     public boolean remover(Produtor t) {
         return produtor_dao.excluir(t);
     }
 
-    @Override
     public Produtor obter(Class<Produtor> classe, Object id) {
         return produtor_dao.obter(classe, id);
     }
 
-    @Override
     public List<Produtor> obterTodos(Class<Produtor> classe) {
         return produtor_dao.obterTodos(classe);
     }

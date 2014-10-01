@@ -5,10 +5,7 @@
  */
 package br.ufra.acai.dao.servicos;
 
-import br.ufra.acai.dao.FabricaDAO;
-import br.ufra.acai.dao.GenericDAO;
 import br.ufra.acai.dao.ProdutorDAO;
-import br.ufra.acai.entidade.Produto;
 import br.ufra.acai.entidade.Produtor;
 import java.util.List;
 import javax.persistence.Query;

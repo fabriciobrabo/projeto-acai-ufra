@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    template="/template/templatePadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="conteudoCentro">
+        <h:form id="formAssociacao">
+            <p:panel id="imPanelAssociacao" header="Associacão" style="text-align: center">
+                <center>
+                    <h:inputHidden 
+                        id="imIHAssociacao" 
+                        value="#{associacaoBean.associacao.id}"/>
+                    <h:panelGrid id="imGridAssociacao" columns="2">
+                        <h:outputText value="Nome:"
+                                      title="Nome da associação."/>
+                        <p:inputText
+                            id="itNome" 
+                            value="#{associacaoBean.associacao.nome}"
+                            maxlength="45"
+                            requiredMessage="Campo obrigatório" 
+                            required="true"/>
+                        <h:outputText value="Email:"
+                                      title="Email de contato da associação."/>
+                        <p:inputText
+                            id="itEmail" 
+                            value="#{associacaoBean.associacao.email}" 
+                            maxlength="45"
+                            requiredMessage="Campo obrigatório"
+                            required="true"/>
+                        <h:outputText value="Telefone:"
+                                      title="Telefone de contato da associação."/>
+                        <p:inputText
+                            id="itTelefone" 
+                            value="#{associacaoBean.associacao.telefone}"
+                            maxlength="45"
+                            requiredMessage="Campo obrigatório"
+                            required="true"/>
+                        <h:outputText value="Responsável:"
+                                      title="Responsável pela associação."/>
+                        <p:inputText
+                            id="itResponsavel" 
+                            value="#{associacaoBean.associacao.responsavel}"
+                            maxlength="45"
+                            requiredMessage="Campo obrigatório"
+                            required="true"/>
+                        <h:outputText value="Localização:"
+                                      title="Localização da associação."/>
+                        <p:inputText
+                            id="itlocalizacao" 
+                            value="#{associacaoBean.associacao.localizacao}"
+                            maxlength="45"
+                            requiredMessage="Campo obrigatório"
+                            required="true"/>
+                        <h:outputText value="Descrição de atividade:"
+                                      title="Descrever aqui as atividades da associação (Campo não obrigatório)."/>
+                        <p:inputTextarea
+                            id="itDA" 
+                            value="#{associacaoBean.associacao.descricaoAtividade}"
+                            maxlength="300"/>
+                    </h:panelGrid>
+
+                    <p:commandButton
+                        id="imSalvar"
+                        ajax="false"
+                        icon="ui-icon-check"
+                        value="Salvar"
+                        update="formAssociacao"
+                        action="#{associacaoBean.salvar()}"/>
+                    <p:button
+                        id="imCancelar"
+                        icon="ui-icon-closethick"
+                        value="Cancelar"
+                        href="/sistema/inicio.jsf"
+                        />
+                </center>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

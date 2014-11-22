@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    template="/template/templatePadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="conteudoCentro">
+        <h:form id="formProduto"
+                <p:panel id="imPanelProduto" header="Local" style="text-align: center">
+                <center>
+                    <h:inputHidden 
+                        id="imInputproduto" 
+                        value="#{produtoBean.produto.id}"/>
+                    <h:panelGrid id="imGridProduto" columns="2">
+                        <h:outputText title="Nome do local." 
+                                      value="Nome:"/>
+                        <p:autoComplete 
+                            id="acProduto"
+                            value="#{produtoBean.produto.rasa}" 
+                            converter="representanteConversor"
+                            completeMethod="#{representanteBean.autoCompleteRepresentante}"
+                            var="representante"
+                            itemLabel="#{representante.nome}"
+                            itemValue="#{representante}"
+                            >
+                            <p:column headerText="Nome Completo">
+                                <h:outputText value="#{representante.nome} #{representante.sobrenome}" />
+                            </p:column>
+
+                            <p:column headerText="CPF">
+                                <h:outputText value="#{representante.cpf}" />
+                            </p:column>
+                        </p:autoComplete>
+                        <h:outputText value="Localidade:"
+                                      title="Pequena área, fazenda, cidade,regiao ou uma ilha"
+                                      />
+                        <p:inputText
+                            id="itLocalidade" 
+                            value="#{localBean.local.localidade}"                      
+                            />
+                    </h:panelGrid>
+                    <p>
+                        <p:commandButton
+                            id="imSalvar"
+                            ajax="false"
+                            icon="ui-icon-check"
+                            value="Salvar"
+                            update="formLocal"
+                            action="#{localBean.salvar()}"/>
+                        <p:button
+                            id="imCancelar"
+                            icon="ui-icon-closethick"
+                            value="Cancelar"
+                            href="/sistema/inicio.jsf"
+                            />
+                    </p>
+                </center>
+            </p:panel>
+    </ui:define>
+</ui:composition>
+

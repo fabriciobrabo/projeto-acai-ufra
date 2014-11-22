@@ -8,7 +8,9 @@ package br.ufra.acai.bean;
 import br.ufra.acai.bean.util.BeanUtil;
 import br.ufra.acai.entidade.Produtor;
 import br.ufra.acai.entidade.Usuario;
-import br.ufra.acai.rn.servicos.UsuarioRNImpl;
+import br.ufra.acai.rn.UsuarioRN;
+import br.ufra.acai.spring.Util;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -18,7 +20,7 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class UsuarioBean {
 
-    private final UsuarioRNImpl rn_usuario = new UsuarioRNImpl();
+    private final UsuarioRN rn_usuario = new UsuarioRN();
     private Usuario usuario = new Usuario();
     private Produtor produtor = new Produtor();
     private List<Usuario> usuarios;
@@ -45,7 +47,11 @@ public class UsuarioBean {
     }
 
     public String salvar() {
-        if (rn_usuario.salvar(usuario, produtor)) {
+        if (usuario.getProdutorList() == null) {
+            usuario.setProdutorList(new ArrayList<Produtor>());
+            usuario.getProdutorList().add(produtor);
+        }
+        if (rn_usuario.salvar(usuario)) {
             BeanUtil.mensagem(FacesMessage.SEVERITY_INFO, "Sucesso! O usuário "
                     + produtor.getNome() + " " + produtor.getSobrenome() + " foi cadastrado");
             return "/acesso/login.jsf";
@@ -68,7 +74,8 @@ public class UsuarioBean {
         return "/sistema/inicio.xhtml";
     }
 
-    public String deslogar() {
+    public String logout() {
+        Util.encerrarSessao();
         return "/acesso/login.xhtml";
     }
 

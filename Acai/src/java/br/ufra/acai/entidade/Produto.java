@@ -7,10 +7,7 @@
 package br.ufra.acai.entidade;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,10 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,13 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Produto.findAll", query = "SELECT p FROM Produto p"),
-    @NamedQuery(name = "Produto.findById", query = "SELECT p FROM Produto p WHERE p.id = :id"),
-    @NamedQuery(name = "Produto.findByPeso", query = "SELECT p FROM Produto p WHERE p.peso = :peso"),
-    @NamedQuery(name = "Produto.findByDataVenda", query = "SELECT p FROM Produto p WHERE p.dataVenda = :dataVenda"),
-    @NamedQuery(name = "Produto.findByQrcode", query = "SELECT p FROM Produto p WHERE p.qrcode = :qrcode"),
-    @NamedQuery(name = "Produto.findByPrecoVenda", query = "SELECT p FROM Produto p WHERE p.precoVenda = :precoVenda"),
-    @NamedQuery(name = "Produto.findByTipoTransporte", query = "SELECT p FROM Produto p WHERE p.tipoTransporte = :tipoTransporte"),
-    @NamedQuery(name = "Produto.findByQuantidade", query = "SELECT p FROM Produto p WHERE p.quantidade = :quantidade")})
+    @NamedQuery(name = "Produto.findById", query = "SELECT p FROM Produto p WHERE p.id = :id")})
 public class Produto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,45 +37,18 @@ public class Produto implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
-    @Column(name = "peso")
-    private BigDecimal peso;
-    @Basic(optional = false)
-    @Column(name = "data_venda")
-    private String dataVenda;
-    @Column(name = "qrcode")
-    private String qrcode;
-    @Column(name = "preco_venda")
-    private BigDecimal precoVenda;
-    @Basic(optional = false)
-    @Column(name = "tipoTransporte")
-    private String tipoTransporte;
-    @Basic(optional = false)
-    @Column(name = "quantidade")
-    private int quantidade;
-    @JoinColumn(name = "transportadora", referencedColumnName = "id")
+    @JoinColumn(name = "colheita", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Transportadora transportadora;
+    private Colheita colheita;
     @JoinColumn(name = "rasa", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Rasa rasa;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto")
-    private List<ItemProduto> itemProdutoList;
 
     public Produto() {
     }
 
     public Produto(Integer id) {
         this.id = id;
-    }
-
-    public Produto(Integer id, BigDecimal peso, String dataVenda, String tipoTransporte, int quantidade) {
-        this.id = id;
-        this.peso = peso;
-        this.dataVenda = dataVenda;
-        this.tipoTransporte = tipoTransporte;
-        this.quantidade = quantidade;
     }
 
     public Integer getId() {
@@ -97,60 +59,12 @@ public class Produto implements Serializable {
         this.id = id;
     }
 
-    public BigDecimal getPeso() {
-        return peso;
+    public Colheita getColheita() {
+        return colheita;
     }
 
-    public void setPeso(BigDecimal peso) {
-        this.peso = peso;
-    }
-
-    public String getDataVenda() {
-        return dataVenda;
-    }
-
-    public void setDataVenda(String dataVenda) {
-        this.dataVenda = dataVenda;
-    }
-
-    public String getQrcode() {
-        return qrcode;
-    }
-
-    public void setQrcode(String qrcode) {
-        this.qrcode = qrcode;
-    }
-
-    public BigDecimal getPrecoVenda() {
-        return precoVenda;
-    }
-
-    public void setPrecoVenda(BigDecimal precoVenda) {
-        this.precoVenda = precoVenda;
-    }
-
-    public String getTipoTransporte() {
-        return tipoTransporte;
-    }
-
-    public void setTipoTransporte(String tipoTransporte) {
-        this.tipoTransporte = tipoTransporte;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public Transportadora getTransportadora() {
-        return transportadora;
-    }
-
-    public void setTransportadora(Transportadora transportadora) {
-        this.transportadora = transportadora;
+    public void setColheita(Colheita colheita) {
+        this.colheita = colheita;
     }
 
     public Rasa getRasa() {
@@ -159,15 +73,6 @@ public class Produto implements Serializable {
 
     public void setRasa(Rasa rasa) {
         this.rasa = rasa;
-    }
-
-    @XmlTransient
-    public List<ItemProduto> getItemProdutoList() {
-        return itemProdutoList;
-    }
-
-    public void setItemProdutoList(List<ItemProduto> itemProdutoList) {
-        this.itemProdutoList = itemProdutoList;
     }
 
     @Override

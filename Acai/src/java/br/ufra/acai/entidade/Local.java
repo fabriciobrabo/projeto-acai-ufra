@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
@@ -30,62 +32,64 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Local.findAll", query = "SELECT l FROM Local l"),
-    @NamedQuery(name = "Local.findByLocal", query = "SELECT l FROM Local l WHERE l.local = :local"),
+    @NamedQuery(name = "Local.findById", query = "SELECT l FROM Local l WHERE l.id = :id"),
     @NamedQuery(name = "Local.findByNome", query = "SELECT l FROM Local l WHERE l.nome = :nome"),
-    @NamedQuery(name = "Local.findByCidade", query = "SELECT l FROM Local l WHERE l.cidade = :cidade"),
+    @NamedQuery(name = "Local.findByLocalidade", query = "SELECT l FROM Local l WHERE l.localidade = :localidade"),
     @NamedQuery(name = "Local.findByEstado", query = "SELECT l FROM Local l WHERE l.estado = :estado"),
-    @NamedQuery(name = "Local.findByCoordenadas", query = "SELECT l FROM Local l WHERE l.coordenadas = :coordenadas")})
+    @NamedQuery(name = "Local.findByLatitude", query = "SELECT l FROM Local l WHERE l.latitude = :latitude"),
+    @NamedQuery(name = "Local.findByLongitude", query = "SELECT l FROM Local l WHERE l.longitude = :longitude"),
+    @NamedQuery(name = "Local.findByValidado", query = "SELECT l FROM Local l WHERE l.validado = :validado")})
 public class Local implements Serializable {
-    @Basic(optional = false)
-    @Column(name = "localidade")
-    private String localidade;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "latitude")
-    private Float latitude;
-    @Column(name = "longitude")
-    private Float longitude;
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "local")
-    private Integer local;
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "nome")
     private String nome;
+    @Basic(optional = false)
+    @Column(name = "localidade")
+    private String localidade;
     @Lob
     @Column(name = "complemento")
     private String complemento;
     @Basic(optional = false)
-    @Column(name = "cidade")
-    private String cidade;
-    @Basic(optional = false)
     @Column(name = "estado")
     private String estado;
-    @Column(name = "coordenadas")
-    private String coordenadas;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "local")
-    private List<Extracao> extracaoList;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "latitude")
+    private Double latitude;
+    @Column(name = "longitude")
+    private Double longitude;
+    @Column(name = "validado")
+    private Boolean validado;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "local", orphanRemoval = true)
+    private List<Colheita> colheitaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "local", orphanRemoval = true)
+    private List<Produtor> produtorList;
 
     public Local() {
     }
 
-    public Local(Integer local) {
-        this.local = local;
+    public Local(Integer id) {
+        this.id = id;
     }
 
-    public Local(Integer local, String nome, String cidade, String estado) {
-        this.local = local;
+    public Local(Integer id, String nome, String localidade, String estado) {
+        this.id = id;
         this.nome = nome;
-        this.cidade = cidade;
+        this.localidade = localidade;
         this.estado = estado;
     }
 
-    public Integer getLocal() {
-        return local;
+    public Integer getId() {
+        return id;
     }
 
-    public void setLocal(Integer local) {
-        this.local = local;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -96,20 +100,20 @@ public class Local implements Serializable {
         this.nome = nome;
     }
 
+    public String getLocalidade() {
+        return localidade;
+    }
+
+    public void setLocalidade(String localidade) {
+        this.localidade = localidade;
+    }
+
     public String getComplemento() {
         return complemento;
     }
 
     public void setComplemento(String complemento) {
         this.complemento = complemento;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
     }
 
     public String getEstado() {
@@ -120,27 +124,52 @@ public class Local implements Serializable {
         this.estado = estado;
     }
 
-    public String getCoordenadas() {
-        return coordenadas;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setCoordenadas(String coordenadas) {
-        this.coordenadas = coordenadas;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Boolean getValidado() {
+        return validado;
+    }
+
+    public void setValidado(Boolean validado) {
+        this.validado = validado;
     }
 
     @XmlTransient
-    public List<Extracao> getExtracaoList() {
-        return extracaoList;
+    public List<Colheita> getColheitaList() {
+        return colheitaList;
     }
 
-    public void setExtracaoList(List<Extracao> extracaoList) {
-        this.extracaoList = extracaoList;
+    public void setColheitaList(List<Colheita> colheitaList) {
+        this.colheitaList = colheitaList;
+    }
+
+    @XmlTransient
+    public List<Produtor> getProdutorList() {
+        return produtorList;
+    }
+
+    public void setProdutorList(List<Produtor> produtorList) {
+        this.produtorList = produtorList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (local != null ? local.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -151,7 +180,7 @@ public class Local implements Serializable {
             return false;
         }
         Local other = (Local) object;
-        if ((this.local == null && other.local != null) || (this.local != null && !this.local.equals(other.local))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -159,31 +188,7 @@ public class Local implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.acai.entidade.Local[ local=" + local + " ]";
-    }
-
-    public String getLocalidade() {
-        return localidade;
-    }
-
-    public void setLocalidade(String localidade) {
-        this.localidade = localidade;
-    }
-
-    public Float getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Float latitude) {
-        this.latitude = latitude;
-    }
-
-    public Float getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Float longitude) {
-        this.longitude = longitude;
+        return "br.ufra.acai.entidade.Local[ id=" + id + " ]";
     }
     
 }

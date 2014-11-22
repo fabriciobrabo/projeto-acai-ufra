@@ -9,6 +9,7 @@ package br.ufra.acai.entidade;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Associacao.findAll", query = "SELECT a FROM Associacao a"),
-    @NamedQuery(name = "Associacao.findByAssociacao", query = "SELECT a FROM Associacao a WHERE a.associacao = :associacao"),
+    @NamedQuery(name = "Associacao.findById", query = "SELECT a FROM Associacao a WHERE a.id = :id"),
     @NamedQuery(name = "Associacao.findByResponsavel", query = "SELECT a FROM Associacao a WHERE a.responsavel = :responsavel"),
     @NamedQuery(name = "Associacao.findByNome", query = "SELECT a FROM Associacao a WHERE a.nome = :nome"),
     @NamedQuery(name = "Associacao.findByTelefone", query = "SELECT a FROM Associacao a WHERE a.telefone = :telefone"),
@@ -42,8 +43,8 @@ public class Associacao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "associacao")
-    private Integer associacao;
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "responsavel")
     private String responsavel;
@@ -61,18 +62,18 @@ public class Associacao implements Serializable {
     private String localizacao;
     @Column(name = "descricao_Atividade")
     private String descricaoAtividade;
-    @OneToMany(mappedBy = "associacao")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "associacao", orphanRemoval = true)
     private List<Produtor> produtorList;
 
     public Associacao() {
     }
 
-    public Associacao(Integer associacao) {
-        this.associacao = associacao;
+    public Associacao(Integer id) {
+        this.id = id;
     }
 
-    public Associacao(Integer associacao, String responsavel, String nome, String telefone, String email, String localizacao) {
-        this.associacao = associacao;
+    public Associacao(Integer id, String responsavel, String nome, String telefone, String email, String localizacao) {
+        this.id = id;
         this.responsavel = responsavel;
         this.nome = nome;
         this.telefone = telefone;
@@ -80,12 +81,12 @@ public class Associacao implements Serializable {
         this.localizacao = localizacao;
     }
 
-    public Integer getAssociacao() {
-        return associacao;
+    public Integer getId() {
+        return id;
     }
 
-    public void setAssociacao(Integer associacao) {
-        this.associacao = associacao;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getResponsavel() {
@@ -148,7 +149,7 @@ public class Associacao implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (associacao != null ? associacao.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -159,7 +160,7 @@ public class Associacao implements Serializable {
             return false;
         }
         Associacao other = (Associacao) object;
-        if ((this.associacao == null && other.associacao != null) || (this.associacao != null && !this.associacao.equals(other.associacao))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -167,7 +168,7 @@ public class Associacao implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.acai.entidade.Associacao[ associacao=" + associacao + " ]";
+        return "br.ufra.acai.entidade.Associacao[ id=" + id + " ]";
     }
     
 }

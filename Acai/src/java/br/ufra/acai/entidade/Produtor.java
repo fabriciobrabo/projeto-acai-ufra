@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bpmlab
+ * @author ufrastic
  */
 @Entity
 @Table(name = "produtor")
@@ -40,7 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Produtor.findByCpf", query = "SELECT p FROM Produtor p WHERE p.cpf = :cpf"),
     @NamedQuery(name = "Produtor.findByTelefone", query = "SELECT p FROM Produtor p WHERE p.telefone = :telefone"),
     @NamedQuery(name = "Produtor.findByEmail", query = "SELECT p FROM Produtor p WHERE p.email = :email"),
-    @NamedQuery(name = "Produtor.findByLocalizacao", query = "SELECT p FROM Produtor p WHERE p.localizacao = :localizacao"),
     @NamedQuery(name = "Produtor.findByCnpj", query = "SELECT p FROM Produtor p WHERE p.cnpj = :cnpj")})
 public class Produtor implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -64,28 +63,22 @@ public class Produtor implements Serializable {
     @Basic(optional = false)
     @Column(name = "telefone")
     private String telefone;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="E-mail inválido")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @Column(name = "email")
     private String email;
-    @Basic(optional = false)
-    @Column(name = "localizacao")
-    private String localizacao;
     @Column(name = "cnpj")
     private String cnpj;
-    @JoinColumn(name = "responsavel", referencedColumnName = "id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtor", orphanRemoval = true)
+    private List<Colheita> colheitaList;
+    @JoinColumn(name = "local", referencedColumnName = "id")
     @ManyToOne
-    private Responsavel responsavel;
-    @JoinColumn(name = "associacao", referencedColumnName = "associacao")
-    @ManyToOne
-    private Associacao associacao;
+    private Local local;
     @JoinColumn(name = "usuario", referencedColumnName = "id")
     @ManyToOne
     private Usuario usuario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtor")
-    private List<Rasa> rasaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtor")
-    private List<Extracao> extracaoList;
+    @JoinColumn(name = "associacao", referencedColumnName = "id")
+    @ManyToOne
+    private Associacao associacao;
 
     public Produtor() {
     }
@@ -94,7 +87,7 @@ public class Produtor implements Serializable {
         this.id = id;
     }
 
-    public Produtor(Integer id, String nome, String sobrenome, String rg, String cpf, String telefone, String email, String localizacao) {
+    public Produtor(Integer id, String nome, String sobrenome, String rg, String cpf, String telefone, String email) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -102,7 +95,6 @@ public class Produtor implements Serializable {
         this.cpf = cpf;
         this.telefone = telefone;
         this.email = email;
-        this.localizacao = localizacao;
     }
 
     public Integer getId() {
@@ -161,14 +153,6 @@ public class Produtor implements Serializable {
         this.email = email;
     }
 
-    public String getLocalizacao() {
-        return localizacao;
-    }
-
-    public void setLocalizacao(String localizacao) {
-        this.localizacao = localizacao;
-    }
-
     public String getCnpj() {
         return cnpj;
     }
@@ -177,20 +161,21 @@ public class Produtor implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public Responsavel getResponsavel() {
-        return responsavel;
+    @XmlTransient
+    public List<Colheita> getColheitaList() {
+        return colheitaList;
     }
 
-    public void setResponsavel(Responsavel responsavel) {
-        this.responsavel = responsavel;
+    public void setColheitaList(List<Colheita> colheitaList) {
+        this.colheitaList = colheitaList;
     }
 
-    public Associacao getAssociacao() {
-        return associacao;
+    public Local getLocal() {
+        return local;
     }
 
-    public void setAssociacao(Associacao associacao) {
-        this.associacao = associacao;
+    public void setLocal(Local local) {
+        this.local = local;
     }
 
     public Usuario getUsuario() {
@@ -201,22 +186,12 @@ public class Produtor implements Serializable {
         this.usuario = usuario;
     }
 
-    @XmlTransient
-    public List<Rasa> getRasaList() {
-        return rasaList;
+    public Associacao getAssociacao() {
+        return associacao;
     }
 
-    public void setRasaList(List<Rasa> rasaList) {
-        this.rasaList = rasaList;
-    }
-
-    @XmlTransient
-    public List<Extracao> getExtracaoList() {
-        return extracaoList;
-    }
-
-    public void setExtracaoList(List<Extracao> extracaoList) {
-        this.extracaoList = extracaoList;
+    public void setAssociacao(Associacao associacao) {
+        this.associacao = associacao;
     }
 
     @Override

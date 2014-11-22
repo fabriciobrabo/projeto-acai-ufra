@@ -33,15 +33,15 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author ufrastic
  */
 @Entity
-@Table(name = "extracao")
+@Table(name = "colheita")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Extracao.findAll", query = "SELECT e FROM Extracao e"),
-    @NamedQuery(name = "Extracao.findById", query = "SELECT e FROM Extracao e WHERE e.id = :id"),
-    @NamedQuery(name = "Extracao.findByDataColheita", query = "SELECT e FROM Extracao e WHERE e.dataColheita = :dataColheita"),
-    @NamedQuery(name = "Extracao.findByPeso", query = "SELECT e FROM Extracao e WHERE e.peso = :peso"),
-    @NamedQuery(name = "Extracao.findByObservacao", query = "SELECT e FROM Extracao e WHERE e.observacao = :observacao")})
-public class Extracao implements Serializable {
+    @NamedQuery(name = "Colheita.findAll", query = "SELECT c FROM Colheita c"),
+    @NamedQuery(name = "Colheita.findById", query = "SELECT c FROM Colheita c WHERE c.id = :id"),
+    @NamedQuery(name = "Colheita.findByDataColheita", query = "SELECT c FROM Colheita c WHERE c.dataColheita = :dataColheita"),
+    @NamedQuery(name = "Colheita.findByPeso", query = "SELECT c FROM Colheita c WHERE c.peso = :peso"),
+    @NamedQuery(name = "Colheita.findByObservacao", query = "SELECT c FROM Colheita c WHERE c.observacao = :observacao")})
+public class Colheita implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,23 +57,23 @@ public class Extracao implements Serializable {
     private BigDecimal peso;
     @Column(name = "observacao")
     private String observacao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "extracao")
-    private List<ItemProduto> itemProdutoList;
-    @JoinColumn(name = "local", referencedColumnName = "local")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colheita", orphanRemoval = true)
+    private List<Produto> produtoList;
+    @JoinColumn(name = "local", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Local local;
     @JoinColumn(name = "produtor", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Produtor produtor;
 
-    public Extracao() {
+    public Colheita() {
     }
 
-    public Extracao(Integer id) {
+    public Colheita(Integer id) {
         this.id = id;
     }
 
-    public Extracao(Integer id, Date dataColheita) {
+    public Colheita(Integer id, Date dataColheita) {
         this.id = id;
         this.dataColheita = dataColheita;
     }
@@ -111,12 +111,12 @@ public class Extracao implements Serializable {
     }
 
     @XmlTransient
-    public List<ItemProduto> getItemProdutoList() {
-        return itemProdutoList;
+    public List<Produto> getProdutoList() {
+        return produtoList;
     }
 
-    public void setItemProdutoList(List<ItemProduto> itemProdutoList) {
-        this.itemProdutoList = itemProdutoList;
+    public void setProdutoList(List<Produto> produtoList) {
+        this.produtoList = produtoList;
     }
 
     public Local getLocal() {
@@ -145,10 +145,10 @@ public class Extracao implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Extracao)) {
+        if (!(object instanceof Colheita)) {
             return false;
         }
-        Extracao other = (Extracao) object;
+        Colheita other = (Colheita) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -157,7 +157,7 @@ public class Extracao implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufra.acai.entidade.Extracao[ id=" + id + " ]";
+        return "br.ufra.acai.entidade.Colheita[ id=" + id + " ]";
     }
     
 }

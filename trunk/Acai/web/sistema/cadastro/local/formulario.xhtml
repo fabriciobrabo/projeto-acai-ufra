@@ -7,51 +7,59 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:p="http://primefaces.org/ui"
     xmlns:f="http://xmlns.jcp.org/jsf/core">
-        <ui:define name="conteudoCentro">
-            <p:panel header="Local" style="text-align: center">
+    <ui:define name="conteudoCentro">
+        <h:form id="formLocal">
+
+            <p:panel id="imPanelLocal" header="Local" style="text-align: center">
                 <center>
                     <h:inputHidden 
                         id="imInputLocal" 
-                        value=""/>
-                    <h:panelGrid id="imPanelLocal" columns="2">
-                        <h:outputText title="Nome para identificar a propriedade do produtor" 
+                        value="#{localBean.local.id}"/>
+                    <h:panelGrid id="imGridLocal" columns="2">
+                        <h:outputText title="Nome do local." 
                                       value="Nome:"/>
                         <p:inputText
                             id="itNomeLocal" 
-                            value=""
+                            value="#{localBean.local.nome}"
+                            maxlength="45"
                             requiredMessage="Campo obrigatório" 
                             required="true"
                             />
                         <h:outputText value="Localidade:"
-                                      title="Pequena área,regiao ou uma ilha"
+                                      title="Pequena área, fazenda, cidade,regiao ou uma ilha"
                                       />
                         <p:inputText
                             id="itLocalidade" 
-                            value=""                      
+                            value="#{localBean.local.localidade}"                      
                             />
                         <h:outputText value="Complemento:"
-                                      title="Informações extras que possam ajudar a identificação"
+                                      title="Informações extras que possam ajudar a identificação do lugar (Não obrigatório)."
                                       />
-                        <p:inputText
-                            id="itComplemento" 
-                            value=""                      
+                        <p:inputTextarea
+                            id="itaComplemento" 
+                            maxlength="450"
+                            value="#{localBean.local.complemento}"                      
                             />
-                        <h:outputText value="Estado:"/>
+                        <h:outputText value="Estado:"
+                                      title="Estado federativo o qual pertence o local ou região."/>
                         <p:inputText
                             id="itEstado" 
-                            value=""
+                            value="#{localBean.local.estado}"
                             requiredMessage="Campo obrigatório" 
                             required="true"
                             />
-                        <h:outputText value="Latitude:"/>
+                        <h:outputText value="Latitude:"
+                                      title="Numeração equivalente a latitude."
+                                      />
                         <p:inputText
                             id="itLatitude" 
-                            value=""
+                            value="#{localBean.local.latitude}"
                             />
-                        <h:outputText value="Longitude:"/>
+                        <h:outputText value="Longitude:"
+                                      title="Numeração equivalente a longitude"/>
                         <p:inputText
                             id="itLongitude" 
-                            value=""
+                            value="#{localBean.local.longitude}"
                             />
 
                     </h:panelGrid>
@@ -61,17 +69,18 @@
                             ajax="false"
                             icon="ui-icon-check"
                             value="Salvar"
-                            action="#"/>
+                            update="formLocal"
+                            action="#{localBean.salvar()}"/>
                         <p:button
                             id="imCancelar"
-
                             icon="ui-icon-closethick"
                             value="Cancelar"
-                            outcome="/sistema/inicio.jsf"
+                            href="/sistema/inicio.jsf"
                             />
                     </p>
                 </center>
             </p:panel>
-        </ui:define>
-    </ui:composition>
+        </h:form>
+    </ui:define>
+</ui:composition>
 

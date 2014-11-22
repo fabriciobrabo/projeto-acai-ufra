@@ -10,64 +10,71 @@
                     <p:menuitem 
                         value="Concluir Perfil" 
                         ajax="false" 
-                        outcome="/sistema/cadastro/perfil/formulario.jsf" />
+                        url="/sistema/cadastro/perfil/formulario.jsf" />
 
-                    <p:menuitem 
-                        value="Visualizar Perfil" 
-                        ajax="false" 
-                        outcome="/sistema/cadastro/perfil/lista.jsf" />
                 </p:submenu>
 
                 <p:submenu label="Local">
                     <p:menuitem 
-                        value="Incluir" 
+                        value="Novo" 
                         ajax="false" 
-                        outcome="/sistema/cadastro/local/formulario.jsf" />
+                        url="/sistema/cadastro/local/formulario.jsf" />
 
                     <p:menuitem 
                         value="Listar Locais" 
                         ajax="false" 
-                        outcome="/sistema/cadastro/local/lista.jsf" />
+                        url="/sistema/cadastro/local/lista.jsf" />
                 </p:submenu>
 
-                <p:submenu label="Extração">
+                <p:submenu label="Colheita">
                     <p:menuitem 
-                        value="Incluir" 
+                        value="Novo" 
                         ajax="false" 
-                        outcome="/sistema/cadastro/extracao/formulario.jsf" />
+                        url="/sistema/cadastro/colheita/formulario.jsf" />
 
                     <p:menuitem 
-                        value="Listar Extrações" 
+                        value="Listar Colheitas" 
                         ajax="false" 
-                        outcome="/sistema/cadastro/extracao/lista.jsf" />
+                        url="/sistema/cadastro/extracao/lista.jsf" />
                 </p:submenu>
 
-                <p:submenu label="Transportadora">
+                <p:submenu label="Rasa">
                     <p:menuitem 
-                        value="Incluir" 
+                        value="Novo" 
                         ajax="false" 
-                        outcome="/sistema/cadastro/transportadora/formulario.jsf" />
+                        url="/sistema/cadastro/rasa/formulario.jsf" />
 
                     <p:menuitem 
-                        value="Listar Transportadoras" 
+                        value="Listar" 
                         ajax="false" 
-                        outcome="/sistema/cadastro/transportadora/lista.jsf" />
+                        url="/sistema/cadastro/rasa/lista.jsf" />
                 </p:submenu>
 
-                <p:submenu label="Açaí">
+                <p:submenu label="associacao">
                     <p:menuitem 
-                        value="Nova Venda" 
+                        value="Nova Associação" 
                         ajax="false"
-                        outcome="/sistema/cadastro/acai/formulario.jsf" />
+                        url="/sistema/cadastro/associacao/formulario.jsf" />
 
                     <p:menuitem 
-                        value="Listar Vendas" 
+                        value="Listar" 
                         ajax="false" 
-                        outcome="/sistema/cadastro/acai/lista.jsf" />
+                        url="/sistema/cadastro/associacao/lista.jsf" />
+                </p:submenu>
+                <p:submenu label="Produto">
+                    <p:menuitem 
+                        value="Novo" 
+                        ajax="false"
+                        url="/sistema/cadastro/produto/formulario.jsf" />
+
+                    <p:menuitem 
+                        value="Listar" 
+                        ajax="false" 
+                        url="/sistema/cadastro/produto/lista.jsf" />
                 </p:submenu>
                 <p:menuitem
                     icon="ui-icon-power"
-                    onclick="document.location = '#{request.contextPath}/j_spring_security_logout'"
+                    action="#{usuarioBean.logout()}"
                     title="Sair"/>
             </p:menubar>
         </h:form>

@@ -1,7 +1,7 @@
 package br.ufra.acai.spring;
 
 import br.ufra.acai.entidade.Usuario;
-import br.ufra.acai.rn.servicos.UsuarioRNImpl;
+import br.ufra.acai.rn.UsuarioRN;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.dao.DataAccessException;
@@ -23,7 +23,7 @@ public class Login implements UserDetailsService {
         if (string == null || string.isEmpty()) {
             throw new UsernameNotFoundException(string);
         } else {
-            final UsuarioRNImpl rn_usuario = new UsuarioRNImpl();
+            final UsuarioRN rn_usuario = new UsuarioRN();
             Usuario usuarioLogado = rn_usuario.obter(string);
             List<GrantedAuthority> papeis = new ArrayList<>();
             if (usuarioLogado != null) {

@@ -16,8 +16,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -27,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author bpmlab
+ * @author ufrastic
  */
 @Entity
 @Table(name = "rasa")
@@ -53,11 +51,8 @@ public class Rasa implements Serializable {
     private String codigo;
     @Column(name = "complemento")
     private String complemento;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rasa")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rasa", orphanRemoval = true)
     private List<Produto> produtoList;
-    @JoinColumn(name = "produtor", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Produtor produtor;
 
     public Rasa() {
     }
@@ -110,14 +105,6 @@ public class Rasa implements Serializable {
 
     public void setProdutoList(List<Produto> produtoList) {
         this.produtoList = produtoList;
-    }
-
-    public Produtor getProdutor() {
-        return produtor;
-    }
-
-    public void setProdutor(Produtor produtor) {
-        this.produtor = produtor;
     }
 
     @Override

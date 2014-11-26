@@ -7,50 +7,51 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:jsf="http://java.sun.com/jsf">
     <ui:define name="conteudoCentro">
-        <h:form id="formPerfil">
+        <h:form id="formProdutor">
             <p:messages id="mConteudo" showDetail="true" showSummary="true"/>
             <p:panel header="Perfil" style="text-align: center">
                 <center>
+                    <h:inputHidden id="imIHProdutor" value="#{produtorBean.produtor.id}"
                     <h:panelGrid id="imPanelUsuario" columns="2">
                         <p:outputLabel value="Nome:"/>
                         <p:inputText
                             id="itNome" 
-                            value="#{perfilBean.produtor.nome}"
+                            value="#{produtorBean.produtor.nome}"
                             requiredMessage="Campo obrigatório" 
                             required="true"
                             />
                         <p:outputLabel value="Sobrenome:"/>
                         <p:inputText
                             id="itSobre" 
-                            value="#{perfilBean.produtor.sobrenome}"
+                            value="#{produtorBean.produtor.sobrenome}"
                             requiredMessage="Campo obrigatório" 
                             required="true"
                             />
                         <p:outputLabel value="Email de Contato:"/>
                         <p:inputText
                             id="itEmail" 
-                            value="#{perfilBean.produtor.email}"
+                            value="#{produtorBean.produtor.email}"
                             requiredMessage="Campo obrigatório" 
                             required="true"
                             />
                         <p:outputLabel value="Email para login:"/>
                         <p:inputText
                             id="itEmailUser" 
-                            value="#{perfilBean.produtor.usuario.email}"
+                            value="#{produtorBean.produtor.usuario.email}"
                             requiredMessage="Campo obrigatório" 
                             required="true"
                             />
                         <p:outputLabel value="Login alternativo:"/>
                         <p:inputText
                             id="itUsername" 
-                            value="#{perfilBean.produtor.usuario.username}"
+                            value="#{produtorBean.produtor.usuario.username}"
                             requiredMessage="Campo obrigatório" 
                             required="true"
                             />
                         <p:outputLabel value="Senha:"/>
                         <p:password
                             id="itSenha" 
-                            value="#{perfilBean.produtor.usuario.senha}"
+                            value="#{produtorBean.produtor.usuario.senha}"
                             requiredMessage="Campo obrigatório" 
                             required="true"
                             match="itSenha2"
@@ -64,28 +65,28 @@
                         <p:outputLabel value="RG:"/>
                         <p:inputText
                             id="itRG" 
-                            value="#{perfilBean.produtor.rg}"
+                            value="#{produtorBean.produtor.rg}"
                             requiredMessage="Campo obrigatório" 
                             required="true"
                             />
                         <p:outputLabel value="CPF:"/>
                         <p:inputText
                             id="itCPF" 
-                            value="#{perfilBean.produtor.cpf}"
+                            value="#{produtorBean.produtor.cpf}"
                             requiredMessage="Campo obrigatório" 
                             required="true"
                             />
                         <p:outputLabel value="Telefone:"/>
                         <p:inputText
                             id="itTelefone" 
-                            value="#{perfilBean.produtor.telefone}"
+                            value="#{produtorBean.produtor.telefone}"
                             requiredMessage="Campo obrigatório" 
                             required="true"
                             />
                         <p:outputLabel value="CNPJ:"/>
                         <p:inputText
                             id="it" 
-                            value="#{perfilBean.produtor.cnpj}"
+                            value="#{produtorBean.produtor.cnpj}"
                             />
                         <p:commandButton
                             id="imSalvar"
@@ -93,7 +94,7 @@
                             icon="ui-icon-check"
                             value="Salvar"
                             update="formPerfil"
-                            action="#{perfilBean.salvar}"/>
+                            action="#{produtorBean.salvar}"/>
                         <p:button
                             id="imCancelar"
                             icon="ui-icon-closethick"

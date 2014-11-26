@@ -8,39 +8,52 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="conteudoCentro">
-        <h:form id="formProduto"
-                <p:panel id="imPanelProduto" header="Local" style="text-align: center">
+        <h:form id="formProduto">
+            <p:messages id="mProduto" showDetail="true"/>
+            <p:panel id="imPanelProduto" header="Local" style="text-align: center">
                 <center>
                     <h:inputHidden 
-                        id="imInputproduto" 
+                        id="imIHproduto" 
                         value="#{produtoBean.produto.id}"/>
                     <h:panelGrid id="imGridProduto" columns="2">
-                        <h:outputText title="Nome do local." 
-                                      value="Nome:"/>
+                        <h:outputText title="Buscar Rasa pelo código" 
+                                      value="Buscar Rasa:"/>
                         <p:autoComplete 
-                            id="acProduto"
+                            id="acProdutoRasa"
                             value="#{produtoBean.produto.rasa}" 
-                            converter="representanteConversor"
-                            completeMethod="#{representanteBean.autoCompleteRepresentante}"
-                            var="representante"
-                            itemLabel="#{representante.nome}"
-                            itemValue="#{representante}"
+                            converter="rasaConversor"
+                            completeMethod="#{rasaBean.autoCompleteRasa(busca)}"
+                            var="rasa"
+                            itemLabel="#{rasa.codigo}"
+                            itemValue="#{rasa}"
                             >
-                            <p:column headerText="Nome Completo">
-                                <h:outputText value="#{representante.nome} #{representante.sobrenome}" />
+                            <p:column headerText="Codigo">
+                                <h:outputText value="#{rasa.codigo}" />
                             </p:column>
 
-                            <p:column headerText="CPF">
-                                <h:outputText value="#{representante.cpf}" />
+                            <p:column headerText="Peso(Kg)">
+                                <h:outputText value="#{rasa.peso}" />
                             </p:column>
                         </p:autoComplete>
-                        <h:outputText value="Localidade:"
-                                      title="Pequena área, fazenda, cidade,regiao ou uma ilha"
-                                      />
-                        <p:inputText
-                            id="itLocalidade" 
-                            value="#{localBean.local.localidade}"                      
-                            />
+                        <h:outputText title="Buscar Colheita por Data" 
+                                      value="Buscar Colheita:"/>
+                        <p:autoComplete 
+                            id="acProdutoColheita"
+                            value="#{produtoBean.produto.colheita}" 
+                            converter="colheitaConversor"
+                            completeMethod="#{colheitaBean.autoCompleteColheita(busca)}"
+                            var="colheita"
+                            itemLabel="#{colheita.data}"
+                            itemValue="#{colheita}"
+                            >
+                            <p:column headerText="Data">
+                                <h:outputText value="#{colheita.data}" />
+                            </p:column>
+
+                            <p:column headerText="Produtor">
+                                <h:outputText value="#{colheita.produtor.nome}" />
+                            </p:column>
+                        </p:autoComplete>
                     </h:panelGrid>
                     <p>
                         <p:commandButton
@@ -59,6 +72,7 @@
                     </p>
                 </center>
             </p:panel>
+        </h:form>
     </ui:define>
 </ui:composition>
 

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    template="/template/templatePadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="conteudoCentro"> 
+        <h:body>    
+            <h:form id="formListRasa">
+                <p:panel header="Lista de Rasas" style="text-align: center">
+                    <center>
+                        <p:dataTable
+                            id="imListagemRasa"
+                            emptyMessage="Nenhum registro"
+                            value="#{rasaBean.listaRasas}"
+                            var="rasa">
+                            <f:facet name="header">
+                                <h:outputText value="Rasas/Cestos Cadastrados"/>
+                            </f:facet>
+                            <p:column headerText="Peso(Kg)">
+                                <h:outputText value="#{rasa.peso}" />
+                            </p:column>
+                            <p:column headerText="Complemento">
+                                <h:outputText value="#{rasa.complemento}" />
+                            </p:column>
+                            <p:column headerText="Codigo">
+                                <h:outputText value="#{rasa.codigo}" />
+                            </p:column>
+                            <p:column headerText="Operações">
+                                <p:commandButton
+                                    id="imEditar"
+                                    ajax="false"
+                                    icon="ui-icon-pencil"
+                                    title="Editar"
+                                    action="#{rasaBean.editar()}">
+                                    <f:setPropertyActionListener
+                                        target="#{rasaBean.rasa}"
+                                        value="#{rasa}"/>
+                                </p:commandButton>
+                                <p:commandButton
+                                    id="imExcluir"
+                                    icon="ui-icon-trash"
+                                    title="Excluir"
+                                    update="imListagemRasa"
+                                    action="#{rasaBean.excluir()}">
+                                    <f:setPropertyActionListener
+                                        target="#{rasaBean.excluir()}"
+                                        value="#{rasa}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </center>
+                </p:panel>
+            </h:form>
+        </h:body>
+    </ui:define>
+</ui:composition>

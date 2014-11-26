@@ -7,9 +7,7 @@
 package br.ufra.acai.entidade;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,14 +16,12 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ufrastic
+ * @author bpmlab
  */
 @Entity
 @Table(name = "local")
@@ -34,8 +30,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Local.findAll", query = "SELECT l FROM Local l"),
     @NamedQuery(name = "Local.findById", query = "SELECT l FROM Local l WHERE l.id = :id"),
     @NamedQuery(name = "Local.findByNome", query = "SELECT l FROM Local l WHERE l.nome = :nome"),
-    @NamedQuery(name = "Local.findByLocalidade", query = "SELECT l FROM Local l WHERE l.localidade = :localidade"),
-    @NamedQuery(name = "Local.findByEstado", query = "SELECT l FROM Local l WHERE l.estado = :estado"),
     @NamedQuery(name = "Local.findByLatitude", query = "SELECT l FROM Local l WHERE l.latitude = :latitude"),
     @NamedQuery(name = "Local.findByLongitude", query = "SELECT l FROM Local l WHERE l.longitude = :longitude"),
     @NamedQuery(name = "Local.findByValidado", query = "SELECT l FROM Local l WHERE l.validado = :validado")})
@@ -49,15 +43,9 @@ public class Local implements Serializable {
     @Basic(optional = false)
     @Column(name = "nome")
     private String nome;
-    @Basic(optional = false)
-    @Column(name = "localidade")
-    private String localidade;
     @Lob
     @Column(name = "complemento")
     private String complemento;
-    @Basic(optional = false)
-    @Column(name = "estado")
-    private String estado;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "latitude")
     private Double latitude;
@@ -65,10 +53,6 @@ public class Local implements Serializable {
     private Double longitude;
     @Column(name = "validado")
     private Boolean validado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "local", orphanRemoval = true)
-    private List<Colheita> colheitaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "local", orphanRemoval = true)
-    private List<Produtor> produtorList;
 
     public Local() {
     }
@@ -77,11 +61,9 @@ public class Local implements Serializable {
         this.id = id;
     }
 
-    public Local(Integer id, String nome, String localidade, String estado) {
+    public Local(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
-        this.localidade = localidade;
-        this.estado = estado;
     }
 
     public Integer getId() {
@@ -100,28 +82,12 @@ public class Local implements Serializable {
         this.nome = nome;
     }
 
-    public String getLocalidade() {
-        return localidade;
-    }
-
-    public void setLocalidade(String localidade) {
-        this.localidade = localidade;
-    }
-
     public String getComplemento() {
         return complemento;
     }
 
     public void setComplemento(String complemento) {
         this.complemento = complemento;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 
     public Double getLatitude() {
@@ -146,24 +112,6 @@ public class Local implements Serializable {
 
     public void setValidado(Boolean validado) {
         this.validado = validado;
-    }
-
-    @XmlTransient
-    public List<Colheita> getColheitaList() {
-        return colheitaList;
-    }
-
-    public void setColheitaList(List<Colheita> colheitaList) {
-        this.colheitaList = colheitaList;
-    }
-
-    @XmlTransient
-    public List<Produtor> getProdutorList() {
-        return produtorList;
-    }
-
-    public void setProdutorList(List<Produtor> produtorList) {
-        this.produtorList = produtorList;
     }
 
     @Override

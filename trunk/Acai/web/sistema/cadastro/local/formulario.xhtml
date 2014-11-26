@@ -9,11 +9,11 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="conteudoCentro">
         <h:form id="formLocal">
-
+            <p:messages id="mLocal" showDetail="true"/>
             <p:panel id="imPanelLocal" header="Local" style="text-align: center">
                 <center>
                     <h:inputHidden 
-                        id="imInputLocal" 
+                        id="imIHLocal" 
                         value="#{localBean.local.id}"/>
                     <h:panelGrid id="imGridLocal" columns="2">
                         <h:outputText title="Nome do local." 
@@ -25,13 +25,6 @@
                             requiredMessage="Campo obrigatório" 
                             required="true"
                             />
-                        <h:outputText value="Localidade:"
-                                      title="Pequena área, fazenda, cidade,regiao ou uma ilha"
-                                      />
-                        <p:inputText
-                            id="itLocalidade" 
-                            value="#{localBean.local.localidade}"                      
-                            />
                         <h:outputText value="Complemento:"
                                       title="Informações extras que possam ajudar a identificação do lugar (Não obrigatório)."
                                       />
@@ -39,14 +32,6 @@
                             id="itaComplemento" 
                             maxlength="450"
                             value="#{localBean.local.complemento}"                      
-                            />
-                        <h:outputText value="Estado:"
-                                      title="Estado federativo o qual pertence o local ou região."/>
-                        <p:inputText
-                            id="itEstado" 
-                            value="#{localBean.local.estado}"
-                            requiredMessage="Campo obrigatório" 
-                            required="true"
                             />
                         <h:outputText value="Latitude:"
                                       title="Numeração equivalente a latitude."
@@ -61,9 +46,6 @@
                             id="itLongitude" 
                             value="#{localBean.local.longitude}"
                             />
-
-                    </h:panelGrid>
-                    <p>
                         <p:commandButton
                             id="imSalvar"
                             ajax="false"
@@ -77,7 +59,7 @@
                             value="Cancelar"
                             href="/sistema/inicio.jsf"
                             />
-                    </p>
+                    </h:panelGrid>
                 </center>
             </p:panel>
         </h:form>

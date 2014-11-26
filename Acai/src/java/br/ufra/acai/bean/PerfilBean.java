@@ -8,7 +8,7 @@ package br.ufra.acai.bean;
 import br.ufra.acai.bean.util.BeanUtil;
 import br.ufra.acai.entidade.Produtor;
 import br.ufra.acai.rn.ProdutorRN;
-import java.util.List;
+import br.ufra.acai.spring.Util;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -19,13 +19,15 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class ProdutorBean {
+public class PerfilBean {
 
-    public ProdutorBean() {
+    public PerfilBean() {
+        for (Produtor var : Util.obterUsuarioLogado().getProdutorList()) {
+            produtor = var;
+        }
     }
 
-    private Produtor produtor = new Produtor();
-    private List<Produtor> listaProdutores;
+    private Produtor produtor;
     private final ProdutorRN rn_produtor = new ProdutorRN();
 
     public Produtor getProdutor() {
@@ -34,23 +36,6 @@ public class ProdutorBean {
 
     public void setProdutor(Produtor produtor) {
         this.produtor = produtor;
-    }
-
-    public List<Produtor> getListaProdutores() {
-        listaProdutores = rn_produtor.obterTodosOrdenadoNome();
-        return listaProdutores;
-    }
-
-    public String editar() {
-        return "/sistema/cadastro/produtor/formulario.jsf";
-    }
-    
-    public void excluir() {
-        if (rn_produtor.remover(produtor)) {
-            BeanUtil.mensagem(FacesMessage.SEVERITY_INFO, "Feito! Perfil Cadastrado");
-        } else {
-            BeanUtil.mensagem(FacesMessage.SEVERITY_FATAL, "Erro!! Não foi possível remover o produtor");
-        }
     }
 
     public void salvar() {

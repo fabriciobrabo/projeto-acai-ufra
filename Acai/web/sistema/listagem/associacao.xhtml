@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    template="/template/templatePadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="conteudoCentro"> 
+        <h:body>
+            <h:form id="formListAssociacao">
+                <p:panel header="Lista de Associações" style="text-align: center">
+                    <center>
+                        <p:dataTable
+                            id="imListagemAssociacao"
+                            emptyMessage="Nenhum registro"
+                            value="#{associacaoBean.listaAssociacoes}"
+                            var="associacao">
+                            <f:facet name="header">
+                                <h:outputText value="Associações de Produtores Cadastradas"/>
+                            </f:facet>
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{associacao.nome}" />
+                            </p:column>
+                            <p:column headerText="Responsável">
+                                <h:outputText value="#{associacao.responsavel}" />
+                            </p:column>
+                            <p:column headerText="Telefone">
+                                <h:outputText value="#{associacao.telefone}" />
+                            </p:column>
+                            <p:column headerText="Longitude">
+                                <h:outputText value="#{associacao.email}" />
+                            </p:column>
+                            <p:column headerText="Localização">
+                                <h:outputText value="#{associacao.localizacao}" />
+                            </p:column>
+                            <p:column headerText="Localização">
+                                <h:outputText style="text-align: justify" value="#{associacao.descricaoAtividade}" />
+                            </p:column>
+                            <p:column headerText="Operações">
+                                <p:commandButton
+                                    id="imEditar"
+                                    ajax="false"
+                                    icon="ui-icon-pencil"
+                                    title="Editar"
+                                    action="#{associacaoBean.editar()}">
+                                    <f:setPropertyActionListener
+                                        target="#{associacaoBean.associacao}"
+                                        value="#{associacao}"/>
+                                </p:commandButton>
+                                <p:commandButton
+                                    id="imExcluir"
+                                    ajax="false"
+                                    icon="ui-icon-trash"
+                                    title="Excluir"
+                                    update="imListagemAssociacao"
+                                    action="#{associacaoBean.excluir()}">
+                                    <f:setPropertyActionListener
+                                        target=""
+                                        value=""/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </center>
+                </p:panel>
+            </h:form>
+        </h:body>
+    </ui:define>
+</ui:composition>

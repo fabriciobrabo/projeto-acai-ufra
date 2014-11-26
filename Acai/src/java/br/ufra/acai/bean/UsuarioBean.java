@@ -23,7 +23,7 @@ public class UsuarioBean {
     private final UsuarioRN rn_usuario = new UsuarioRN();
     private Usuario usuario = new Usuario();
     private Produtor produtor = new Produtor();
-    private List<Usuario> usuarios;
+    private List<Usuario> listaUsuarios;
 
     public Usuario getUsuario() {
         return usuario;
@@ -34,8 +34,8 @@ public class UsuarioBean {
     }
 
     public List<Usuario> getUsuarios() {
-        usuarios = rn_usuario.obterTodos();
-        return usuarios;
+        listaUsuarios = rn_usuario.obterTodos();
+        return listaUsuarios;
     }
 
     public Produtor getProdutor() {
@@ -49,6 +49,7 @@ public class UsuarioBean {
     public String salvar() {
         if (usuario.getProdutorList() == null) {
             usuario.setProdutorList(new ArrayList<Produtor>());
+            produtor.setUsuario(usuario);
             usuario.getProdutorList().add(produtor);
         }
         if (rn_usuario.salvar(usuario)) {

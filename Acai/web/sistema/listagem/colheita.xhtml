@@ -8,31 +8,30 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="conteudoCentro"> 
-        <p:panel header="Lista de locais" style="text-align: center">
+        <p:panel header="Lista de Extrações" style="text-align: center">
             <center>
                 <p:dataTable
-                    id="imListagemLocal"
+                    id="imListagemAssociacao"
                     emptyMessage="Nenhum registro"
-                    value=""
-                    var="Locais">
+                    value="#{colheitaBean.listaColheitas}"
+                    var="colheita">
                     <f:facet name="header">
-                        <h:outputText value="Locais de Extração do Produtor"/>
+                        <h:outputText value="Extrações/Colheitas de Açaí realizadas"/>
                     </f:facet>
-                    <p:column headerText="Local">
-                        <p:panelGrid columns="2">
-                            <h:outputText value="Nome:" />
-                            <h:outputText value="" />
-                            <h:outputText value="Localidade:" />
-                            <h:outputText value="" />
-                            <h:outputText value="Complemento:" />
-                            <h:outputText value="" />
-                            <h:outputText value="Estado:" />
-                            <h:outputText value="" />
-                            <h:outputText value="Latitude :" />
-                            <h:outputText value="" />
-                            <h:outputText value="Longitude:" />
-                            <h:outputText value="" />
-                        </p:panelGrid>
+                    <p:column headerText="Data da Colheita">
+                        <h:outputText value="#{colheita.dataColheita}" />
+                    </p:column>
+                    <p:column headerText="Produtor">
+                        <h:outputText value="#{colheita.produtor.nome} #{colheita.produtor.sobrenome}" />
+                    </p:column>
+                    <p:column headerText="Peso(Kg)">
+                        <h:outputText value="#{colheita.peso}" />
+                    </p:column>
+                    <p:column headerText="Observação">
+                        <h:outputText value="#{colheita.observacao}" />
+                    </p:column>
+                    <p:column headerText="Localização">
+                        <h:outputText value="#{colheita.local.nome}" />
                     </p:column>
                     <p:column headerText="Operações">
                         <p:commandButton
@@ -41,19 +40,16 @@
                             icon="ui-icon-pencil"
                             title="Editar"
                             action="#">
-
                             <f:setPropertyActionListener
                                 target=""
                                 value=""/>
                         </p:commandButton>
-
                         <p:commandButton
                             id="imExcluir"
                             ajax="false"
                             icon="ui-icon-trash"
                             title="Excluir"
                             action="#">
-
                             <f:setPropertyActionListener
                                 target=""
                                 value=""/>
@@ -64,5 +60,3 @@
         </p:panel>
     </ui:define>
 </ui:composition>
-
-

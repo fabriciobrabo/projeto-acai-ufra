@@ -7,9 +7,7 @@ package br.ufra.acai.bean;
 
 import br.ufra.acai.bean.util.BeanUtil;
 import br.ufra.acai.entidade.Colheita;
-import br.ufra.acai.entidade.Local;
 import br.ufra.acai.rn.ColheitaRN;
-import br.ufra.acai.rn.LocalRN;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -24,8 +22,8 @@ import javax.faces.bean.RequestScoped;
 public class ColheitaBean {
 
     private Colheita colheita = new Colheita();
+    private List<Colheita> listaColheitas;
     private final ColheitaRN rn_colheita = new ColheitaRN();
-    private final LocalRN rn_local = new LocalRN();
 
     public Colheita getColheita() {
         return colheita;
@@ -35,8 +33,12 @@ public class ColheitaBean {
         this.colheita = rasa;
     }
 
-    public List<Local> cBoxLocal() {
-        return rn_local.obterTodos();
+    public List<Colheita> getListaColheitas() {
+        return listaColheitas;
+    }
+
+    public List<Colheita> autoCompleteColheita(String busca) {
+        return rn_colheita.autoCompleteColheita(busca);
     }
 
     public void salvar() {
@@ -46,5 +48,6 @@ public class ColheitaBean {
             BeanUtil.mensagem(FacesMessage.SEVERITY_FATAL, "Erro!! "
                     + "Não foi possível atualizar/criar a colheita, verifique se já não existe uma rasa com essa identificação");
         }
+        colheita = new Colheita();
     }
 }

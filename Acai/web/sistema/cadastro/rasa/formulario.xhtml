@@ -12,12 +12,15 @@
             <p:messages id="mRasa" showDetail="true" showSummary="true"/>
             <p:panel id="imPanelRasa" header="Rasa" style="text-align: center">
                 <center>
+                    <h:inputHidden
+                        id="imIHRasa"
+                        value="#{rasaBean.rasa.id}"/>
                     <h:panelGrid id="imGridRasa" columns="2">
-                        <h:outputText title="Código de indentificação da rasa (Somente números inteiros)." 
+                        <h:outputText title="Código de indentificação da rasa (Alfa-numérico)." 
                                       value="Código:"/>
                         <p:inputText
                             id="itCodigoRasa" 
-                            value="#{rasaBean.rasa.id}"
+                            value="#{rasaBean.rasa.codigo}"
                             maxlength="11"
                             requiredMessage="Campo obrigatório" 
                             required="true"
@@ -30,20 +33,11 @@
                             maxlength="100"
                             value="#{rasaBean.rasa.complemento}"                      
                             />
-                        <h:outputText value="Código secundário:"
-                                      title="Código segundário que auxilie na identificação da rasa, pode conter numeros e letras (Não obrigatório)."
-                                      />
-                        <p:inputText
-                            id="itCodigo" 
-                            maxlength="45"
-                            value="#{rasaBean.rasa.codigo}"
-                            />
-
-                        <h:outputText value="Volume/Capacidade (Kg)"
+                        <h:outputText value="Peso/Capacidade (Kg)"
                                       title="Volume ou capacidade da rasa, em quilogramas"/>
                         <p:inputText
                             id="itLongitude" 
-                            value="#{rasaBean.rasa.volume}"
+                            value="#{rasaBean.rasa.peso}"
                             />
 
                     </h:panelGrid>

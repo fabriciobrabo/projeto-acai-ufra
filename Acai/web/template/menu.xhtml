@@ -6,76 +6,86 @@
     <h:body>
         <h:form id="menuPrincipal">
             <p:menubar>
-                <p:submenu label="Perfil">
+                <p:menuitem
+                    value="Home"
+                    icon="ui-icon-home"
+                    url="/sistema/inicio.jsf"></p:menuitem>
+                <p:submenu label="Perfil"
+                           icon="ui-icon-contact"
+                           >
                     <p:menuitem 
                         value="Concluir Perfil" 
-                        ajax="false" 
-                        url="/sistema/cadastro/perfil/formulario.jsf" />
-
+                        icon="ui-icon-pencil"
+                        url="/sistema/cadastro/perfil/formulario.jsf" ></p:menuitem>
                 </p:submenu>
 
-                <p:submenu label="Local">
+                <p:submenu label="Local"
+                           icon="ui-icon-pin-s"
+                           >
                     <p:menuitem 
                         value="Novo" 
-                        ajax="false" 
-                        url="/sistema/cadastro/local/formulario.jsf" />
-
+                        icon="ui-icon-document-b"
+                        url="/sistema/cadastro/local/formulario.jsf" ></p:menuitem>
                     <p:menuitem 
+                        icon="ui-icon-clipboard"
                         value="Listar Locais" 
-                        ajax="false" 
-                        url="/sistema/cadastro/local/lista.jsf" />
+                        url="/sistema/listagem/local.jsf" ></p:menuitem>
                 </p:submenu>
 
-                <p:submenu label="Colheita">
+                <p:submenu label="Colheita"
+                           icon="ui-icon-radio-off"
+                           >
                     <p:menuitem 
                         value="Novo" 
-                        ajax="false" 
-                        url="/sistema/cadastro/colheita/formulario.jsf" />
-
+                        icon="ui-icon-document-b"
+                        url="/sistema/cadastro/colheita/formulario.jsf" ></p:menuitem>
                     <p:menuitem 
-                        value="Listar Colheitas" 
-                        ajax="false" 
-                        url="/sistema/cadastro/extracao/lista.jsf" />
+                        value="Listar Colheitas"
+                        icon="ui-icon-clipboard"
+                        url="/sistema/listagem/colheita.jsf" ></p:menuitem>
                 </p:submenu>
 
-                <p:submenu label="Rasa">
+                <p:submenu label="Rasa"
+                           icon="ui-icon-suitcase"
+                           >
                     <p:menuitem 
                         value="Novo" 
-                        ajax="false" 
-                        url="/sistema/cadastro/rasa/formulario.jsf" />
-
+                        icon="ui-icon-document-b"
+                        url="/sistema/cadastro/rasa/formulario.jsf" ></p:menuitem>
                     <p:menuitem 
-                        value="Listar" 
-                        ajax="false" 
-                        url="/sistema/cadastro/rasa/lista.jsf" />
+                        value="Listar Rasas"
+                        icon="ui-icon-clipboard"
+                        url="/sistema/listagem/rasa.jsf" ></p:menuitem>
                 </p:submenu>
 
-                <p:submenu label="associacao">
-                    <p:menuitem 
-                        value="Nova Associação" 
-                        ajax="false"
-                        url="/sistema/cadastro/associacao/formulario.jsf" />
-
-                    <p:menuitem 
-                        value="Listar" 
-                        ajax="false" 
-                        url="/sistema/cadastro/associacao/lista.jsf" />
-                </p:submenu>
-                <p:submenu label="Produto">
+                <p:submenu label="Associacao"
+                           icon="ui-icon-person"
+                           >
                     <p:menuitem 
                         value="Novo" 
-                        ajax="false"
-                        url="/sistema/cadastro/produto/formulario.jsf" />
-
+                        icon="ui-icon-document-b"
+                        url="/sistema/cadastro/associacao/formulario.jsf" ></p:menuitem>
                     <p:menuitem 
-                        value="Listar" 
-                        ajax="false" 
-                        url="/sistema/cadastro/produto/lista.jsf" />
+                        value="Listar Associações"
+                        icon="ui-icon-clipboard"
+                        url="/sistema/listagem/associacao.jsf" ></p:menuitem>
                 </p:submenu>
-                <p:menuitem
-                    icon="ui-icon-power"
-                    action="#{usuarioBean.logout()}"
-                    title="Sair"/>
+                <p:submenu label="Produto"
+                           icon="ui-icon-tag"
+                           >
+                    <p:menuitem 
+                        value="Novo"
+                        icon="ui-icon-document-b"
+                        url="/sistema/cadastro/produto/formulario.jsf" ></p:menuitem>
+                    <p:menuitem 
+                        value="Listar Produtos"
+                        icon="ui-icon-clipboard"
+                        url="/sistema/listagem/produto.jsf" ></p:menuitem>
+                </p:submenu>
+                <p:menuitem id="mi_sair"
+                            value="Sair"
+                            icon="ui-icon-power"
+                            onclick="document.location = '#{request.contextPath}/j_spring_security_logout'" ></p:menuitem>
             </p:menubar>
         </h:form>
     </h:body>

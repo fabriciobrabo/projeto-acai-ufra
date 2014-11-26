@@ -42,7 +42,7 @@ public class RasaRN {
     public List<Rasa> obterTodos() {
         return rasa_dao.obterTodos();
     }
-    
+
     public List<Rasa> autoCompleteRasa(String busca) {
         List<Rasa> resposta = new ArrayList<Rasa>();
         for (Rasa rasa : obterTodos()) {

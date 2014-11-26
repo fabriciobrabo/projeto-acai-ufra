@@ -9,12 +9,15 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="conteudoCentro">
         <h:form  id="formColheita">
+            <p:messages id="mColheita" showDetail="true"/>
             <p:panel id="imPanelColheita" header="Colheita" style="text-align: center">
                 <center>
                     <h:inputHidden 
                         id="imIHColheita" 
                         value=""/>
                     <h:panelGrid id="imGridColheita" columns="2">
+                        <p:outputLabel for="calendario" value="Calendário:" />
+                        <p:calendar id="calendario" value="#{colheitaBean.colheita.dataColheita}" pattern="dd-MM-yyyy" mask="true" />
                         <h:outputText value="Local:"/>
                         <p:selectOneMenu id="soLocal" 
                                          value="#{colheitaBean.colheita.local}" 
@@ -23,15 +26,12 @@
                                          var="t" 
                                          filter="true" 
                                          filterMatchMode="startsWith">
-                            <f:selectItems value="#{colheitaBean.cBoxLocal}" var="p" itemLabel="#{p.nome}" itemValue="#{p}" />
+                            <f:selectItems value="#{localBean.listaLocais}" var="p" itemLabel="#{p.nome}" itemValue="#{p}" />
 
                             <p:column headerText="Nome:">
                                 <h:outputText value="#{t.nome}" />
                             </p:column>
 
-                            <p:column>
-                                <h:outputText value="#{t.estado}" />
-                            </p:column>
                         </p:selectOneMenu>
                         <h:outputText value="Peso:"
                                       title="Quantidade aproximada de açaí colhido"/>

@@ -48,13 +48,13 @@ public class ColheitaRN {
         return colheita_dao.obterTodos();
     }
 
-//    public List<Colheita> autoCompleteColheita(String busca) {
-//        List<Colheita> resposta = new ArrayList<Colheita>();
-//        for (Colheita colheita : obterTodos()) {
-//            if (colheita.getDataColheita()) {
-//                resposta.add(colheita);
-//            }
-//            return resposta;
-//        }
-//    }
+    public List<Colheita> autoCompleteColheita(String busca) {
+        List<Colheita> resposta = new ArrayList<Colheita>();
+        for (Colheita colheita : obterTodos()) {
+            if (colheita.getDataColheita().equals(busca)) {
+                resposta.add(colheita);
+            }
+        }
+        return resposta;
+    }
 }
